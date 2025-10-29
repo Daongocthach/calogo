@@ -8,7 +8,6 @@ import { ThemedView } from '@/components/themed-view';
 import { Collapsible } from '@/components/ui/collapsible';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Fonts } from '@/constants/theme';
-import { DateTimePicker, Host } from '@expo/ui/swift-ui';
 import { useState } from 'react';
 
 export default function TabTwoScreen() {
@@ -24,16 +23,7 @@ export default function TabTwoScreen() {
           style={styles.headerImage}
         />
       }>
-      <Host matchContents>
-        <DateTimePicker
-          onDateSelected={date => {
-            setSelectedDate(date);
-          }}
-          displayedComponents='date'
-          initialDate={selectedDate.toISOString()}
-          variant='wheel'
-        />
-      </Host>
+
       <ThemedView style={styles.titleContainer}>
         <ThemedText
           type="title"
