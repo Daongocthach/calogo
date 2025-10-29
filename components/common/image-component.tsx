@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useTheme } from '@/contexts/ThemeProvider'
+import { useEffect, useState } from 'react'
 import { ActivityIndicator, Image, ImageProps, TouchableOpacity, View } from 'react-native'
 import { useImageViewerModal } from './ImageViewerModal'
-import TextComponent from './TextComponent'
-import { useTheme } from '@/contexts/ThemeProvider'
+import TextComponent from './text-component'
 
 interface ImageComponentProps extends ImageProps {
   uri?: string | null

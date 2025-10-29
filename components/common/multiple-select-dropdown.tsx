@@ -6,9 +6,9 @@ import { MultiSelect } from 'react-native-element-dropdown'
 import { useTheme } from '@/contexts/ThemeProvider'
 import { DropdownProps, FONT_FAMILIES } from '@/lib'
 import Checkbox from './CheckBox'
-import Icon from './icon'
-import RowComponent from './RowComponent'
-import TextComponent from './TextComponent'
+import Icon from './icon-component'
+import RowComponent from './row-component'
+import TextComponent from './text-component'
 
 interface MultiSelectDropdownProps {
   data: DropdownProps[]

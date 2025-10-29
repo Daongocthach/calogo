@@ -6,8 +6,8 @@ import { Modal, Platform, Pressable, SafeAreaView, StyleSheet, View } from 'reac
 
 import { useTheme } from '@/contexts/ThemeProvider'
 import useStore from '@/store'
-import Icon from './icon'
-import TextComponent from './TextComponent'
+import Icon from './icon-component'
+import TextComponent from './text-component'
 
 interface DateTimePickerComponentProps {
   mode: 'date' | 'time' | 'datetime' | 'countdown'

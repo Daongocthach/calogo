@@ -3,7 +3,7 @@ import { Image, StyleSheet, View } from 'react-native'
 import { useTheme } from '@/contexts/ThemeProvider'
 import { getShortName } from '@/lib'
 import useStore from '@/store'
-import TextComponent from './TextComponent'
+import TextComponent from './text-component'
 
 const UserAvatar = ({
   avatarSize = 50,

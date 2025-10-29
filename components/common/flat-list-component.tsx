@@ -1,14 +1,13 @@
 import { useTheme } from '@/contexts/ThemeProvider'
+import { windowHeight } from '@/lib'
 import {
-    FlatList,
-    FlatListProps,
-    ListRenderItem,
-    View,
+  FlatList,
+  FlatListProps,
+  ListRenderItem
 } from 'react-native'
 import IconLabel from './IconLabel'
 import RefreshControlComponent from './RefreshControlComponent'
-import TextComponent from './TextComponent'
-import { windowHeight } from '@/lib'
+import TextComponent from './text-component'
 
 interface FlatListComponentProps extends FlatListProps<any> {
     data: any[]

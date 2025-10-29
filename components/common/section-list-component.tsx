@@ -1,13 +1,13 @@
 import { useTheme } from '@/contexts/ThemeProvider'
 import React, { useEffect, useMemo, useRef } from 'react'
 import {
-    ListRenderItem,
-    SectionList,
-    SectionListProps,
-    View
+  ListRenderItem,
+  SectionList,
+  SectionListProps,
+  View
 } from 'react-native'
 import RefreshControlComponent from './RefreshControlComponent'
-import TextComponent from './TextComponent'
+import TextComponent from './text-component'
 
 type AnySection = { title?: string; data: any[] }
 

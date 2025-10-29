@@ -6,11 +6,11 @@ import { RadioButton } from 'react-native-paper'
 
 import { useTheme } from '@/contexts/ThemeProvider'
 import { DropdownProps, FONT_FAMILIES, gaugesType, windowWidth } from '@/lib'
-import ColumnComponent from './ColumnComponent'
-import Icon from './icon'
+import ColumnComponent from './column-component'
+import Icon from './icon-component'
 import ImageComponent from './ImageComponent'
-import RowComponent from './RowComponent'
-import TextComponent from './TextComponent'
+import RowComponent from './row-component'
+import TextComponent from './text-component'
 
 interface InlineDropdownProps {
   selects: { label: string, value: string | number }[]
