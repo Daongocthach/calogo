@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next"
 import { StyleSheet, View } from "react-native"
 
 import { useTheme } from "@/hooks"
@@ -88,7 +87,6 @@ const styles = StyleSheet.create({
 })
 
 export const renderTabBar = (props: any) => {
-    const { i18n } = useTranslation()
-    return <TabBarComponent key={i18n.language} {...props} />
+    return <TabBarComponent {...props} />
 }
 

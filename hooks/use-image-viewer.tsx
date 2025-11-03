@@ -1,8 +1,8 @@
+import Icon from '@/components/common/icon-component'
+import ModalComponent from '@/components/common/modal-component'
 import React, { useCallback, useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 import ImageViewer from 'react-native-image-zoom-viewer'
-import Icon from './icon-component'
-import ModalComponent from './modal-component'
 
 export const useImageViewerModal = () => {
   const [visible, setVisible] = useState(false)
