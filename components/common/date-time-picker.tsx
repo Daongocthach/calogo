@@ -4,7 +4,7 @@ import { enUS, vi, zhCN, zhTW } from 'date-fns/locale'
 import { useState } from 'react'
 import { Modal, Platform, Pressable, SafeAreaView, StyleSheet, View } from 'react-native'
 
-import { useTheme } from '@/contexts/ThemeProvider'
+import { useTheme } from "@/hooks"
 import useStore from '@/store'
 import Icon from './icon-component'
 import TextComponent from './text-component'
@@ -27,7 +27,7 @@ const DateTimePickerComponent = ({
   placeholder = 'select date',
 }: DateTimePickerComponentProps) => {
   const { currentLanguage } = useStore()
-  const { colors } = useTheme()
+  const colors = useTheme()
 
   const [showPicker, setShowPicker] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
@@ -156,7 +156,7 @@ const DateTimePickerComponent = ({
               borderRadius: 16,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: colors.elevation.level2,
+              backgroundColor: colors.level2,
               zIndex: 2,
             }}
             hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}

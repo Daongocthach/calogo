@@ -1,34 +1,56 @@
 import { Tabs } from 'expo-router'
-import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { HapticTab } from '@/components/haptic-tab'
-import { Colors } from '@/constants/theme'
-import { useColorScheme } from '@/hooks/use-color-scheme'
+import { HapticTab, Header, IconComponent } from '@/components'
+import { useTheme } from '@/hooks'
+
+const screens = [
+  {
+    name: 'index',
+    title: 'meals',
+    icon: 'Utensils' as const,
+  },
+  {
+    name: 'foods',
+    title: 'foods',
+    icon: 'Apple' as const,
+  },
+  {
+    name: 'statistics',
+    title: 'statistics',
+    icon: 'ChartNoAxesColumn' as const,
+  },
+  {
+    name: 'profile',
+    title: 'profile',
+    icon: 'UserRound' as const,
+  },
+]
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme()
+  const { t } = useTranslation()
+  const colors = useTheme()
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: colors.primary,
         headerShown: false,
         tabBarButton: HapticTab,
       }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+      {screens.map((screen) => (
+        <Tabs.Screen
+          key={screen.name}
+          name={screen.name}
+          options={{
+            header: () => <Header title={screen.title}/>,
+            title: t(screen.title),
+            tabBarIcon: ({ color }) => (
+              <IconComponent size={24} name={screen.icon} color={color} />
+            ),
+          }}
+        />
+      ))}
     </Tabs>
   )
 }

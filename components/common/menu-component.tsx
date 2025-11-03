@@ -1,7 +1,7 @@
+import { useTheme } from "@/hooks"
 import React, { ReactElement, ReactNode, useState } from "react"
-import { Pressable, View, ViewStyle, ScrollView, StyleSheet } from "react-native"
+import { Pressable, ScrollView, StyleSheet, View, ViewStyle } from "react-native"
 import Popover from "react-native-popover-view"
-import { useTheme } from "@/contexts/ThemeProvider"
 
 type MenuRenderCtx = { close: () => void }
 
@@ -22,7 +22,7 @@ const MenuComponent = ({
   fullWidth = true,
   disabled = false,
 }: MenuComponentProps): ReactElement => {
-  const { colors } = useTheme()
+  const colors = useTheme()
   const [visible, setVisible] = useState(false)
   const [triggerWidth, setTriggerWidth] = useState(0)
 

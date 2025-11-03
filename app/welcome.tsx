@@ -1,4 +1,3 @@
-import { TextComponent } from "@/components";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function WelcomeScreen() {
@@ -8,7 +7,6 @@ export default function WelcomeScreen() {
         <Text style={styles.title}>Hello World</Text>
         <Text style={styles.subtitle}>This is the first page of your app.</Text>
       </View>
-      <TextComponent color=""
     </View>
   );
 }

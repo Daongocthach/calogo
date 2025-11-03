@@ -1,7 +1,7 @@
-import { useTheme } from '@/contexts/ThemeProvider'
+import { useTheme } from "@/hooks"
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, Image, ImageProps, TouchableOpacity, View } from 'react-native'
-import { useImageViewerModal } from './ImageViewerModal'
+import { useImageViewerModal } from './image-viewer-modal'
 import TextComponent from './text-component'
 
 interface ImageComponentProps extends ImageProps {
@@ -14,7 +14,7 @@ interface ImageComponentProps extends ImageProps {
 
 const ImageComponent = (props: ImageComponentProps) => {
   const { ImageViewerModal, open } = useImageViewerModal()
-  const { colors } = useTheme()
+  const colors = useTheme()
   const {
     uri,
     source,
@@ -102,7 +102,6 @@ const ImageComponent = (props: ImageComponentProps) => {
           />
         </View>
       )}
-
       <ImageViewerModal />
     </View>
   )

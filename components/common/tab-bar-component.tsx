@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next"
 import { StyleSheet, View } from "react-native"
 
-import { useTheme } from "@/contexts/ThemeProvider"
+import { useTheme } from "@/hooks"
 import ColumnComponent from "./column-component"
-import TextComponent from "./TextComponent"
+import TextComponent from "./text-component"
 
 function TabBarComponent(props: any) {
-    const { colors } = useTheme()
+    const colors = useTheme()
     const { index: activeIndex, routes } = props.navigationState
 
     return (

@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next'
+import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native'
 
 import { FONT_FAMILIES } from '@/constants/ui'
 import { useTheme } from '@/hooks'
-import { ThemeColors } from '@/types'
-import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native'
+import { ThemeColorKeys } from '@/types'
 
 interface TextComponentProps extends TextProps {
   children?: React.ReactNode
@@ -12,7 +12,8 @@ interface TextComponentProps extends TextProps {
   size?: number
   weight?: TextStyle['fontWeight']
   font?: 'regular' | 'medium' | 'semibold' | 'bold'
-  color?: keyof ThemeColors | string & {}
+  color?: ThemeColorKeys
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify'
   lineHeight?: number
 }
@@ -26,6 +27,7 @@ const TextComponent = ({
   font = 'regular',
   textAlign,
   color,
+  type,
   lineHeight,
   ...props
 }: TextComponentProps) => {
@@ -57,6 +59,11 @@ const TextComponent = ({
           fontWeight: weight ?? 'normal',
           textAlign: textAlign ?? 'left',
         },
+        type === 'default' ? styles.default : undefined,
+        type === 'title' ? styles.title : undefined,
+        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
+        type === 'subtitle' ? styles.subtitle : undefined,
+        type === 'link' ? styles.link : undefined,
         style,
       ]}
     >
@@ -68,5 +75,27 @@ const TextComponent = ({
 export default TextComponent
 
 const styles = StyleSheet.create({
-  
-})
+  default: {
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  defaultSemiBold: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '600',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    lineHeight: 32,
+  },
+  subtitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  link: {
+    lineHeight: 30,
+    fontSize: 16,
+    color: '#0a7ea4',
+  },
+});

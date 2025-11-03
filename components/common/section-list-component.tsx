@@ -1,12 +1,12 @@
-import { useTheme } from '@/contexts/ThemeProvider'
+import { useTheme } from "@/hooks"
 import React, { useEffect, useMemo, useRef } from 'react'
 import {
-  ListRenderItem,
-  SectionList,
-  SectionListProps,
-  View
+    ListRenderItem,
+    SectionList,
+    SectionListProps,
+    View
 } from 'react-native'
-import RefreshControlComponent from './RefreshControlComponent'
+import RefreshControlComponent from './refresh-control-component'
 import TextComponent from './text-component'
 
 type AnySection = { title?: string; data: any[] }
@@ -46,7 +46,7 @@ export default function SectionListComponent({
     onEndReachedThreshold = 0.1,
     ...props
 }: SectionListComponentProps) {
-    const { colors } = useTheme()
+    const colors = useTheme()
 
     const canLoadMoreRef = useRef(false)
     const lastCalledCountRef = useRef(0)

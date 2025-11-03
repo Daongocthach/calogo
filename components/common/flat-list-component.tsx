@@ -1,12 +1,11 @@
-import { useTheme } from '@/contexts/ThemeProvider'
-import { windowHeight } from '@/lib'
+import { windowHeight } from '@/constants'
+import { useTheme } from "@/hooks"
 import {
-  FlatList,
-  FlatListProps,
-  ListRenderItem
+    FlatList,
+    FlatListProps,
+    ListRenderItem
 } from 'react-native'
-import IconLabel from './IconLabel'
-import RefreshControlComponent from './RefreshControlComponent'
+import RefreshControlComponent from './refresh-control-component'
 import TextComponent from './text-component'
 
 interface FlatListComponentProps extends FlatListProps<any> {
@@ -43,7 +42,7 @@ export default function FlatListComponent({
     contentContainerStyle,
     ...props
 }: FlatListComponentProps) {
-    const { colors } = useTheme()
+    const colors = useTheme()
     return (
         <FlatList
             data={data}
@@ -76,12 +75,9 @@ export default function FlatListComponent({
             }
             ListFooterComponent={
                 (isLoading || isFetchingNextPage) ? (
-                    <IconLabel
-                        iconName='Loader'
-                        size={14}
-                        color={colors.outlineVariant}
-                        label='loading'
-                        style={{ alignSelf: 'center' }}
+                    <TextComponent
+                        style={{ textAlign: 'center', marginVertical: 16, color: colors.outlineVariant }}
+                        text="loading"
                     />
                 ) : data.length > 0 ? (
                     (

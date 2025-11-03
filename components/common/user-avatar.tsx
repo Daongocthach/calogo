@@ -1,8 +1,8 @@
 import { Image, StyleSheet, View } from 'react-native'
 
-import { useTheme } from '@/contexts/ThemeProvider'
-import { getShortName } from '@/lib'
+import { useTheme } from '@/hooks'
 import useStore from '@/store'
+import { getShortName } from '@/utils'
 import TextComponent from './text-component'
 
 const UserAvatar = ({
@@ -18,7 +18,7 @@ const UserAvatar = ({
   isMe?: boolean,
   avatarColor?: string
 }) => {
-  const { colors } = useTheme()
+  const colors = useTheme()
   const { userData } = useStore()
   const shortName = getShortName(isMe ? userData?.full_name : (userName ?? ''))
 

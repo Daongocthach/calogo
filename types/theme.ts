@@ -46,3 +46,6 @@ export type ThemeColors = {
     onSurfaceDisabled: string
     backdrop: string
 }
+
+export type WithThemeColor<T extends string> = T | (string & Record<never, never>)
+export type ThemeColorKeys = WithThemeColor<keyof ThemeColors>

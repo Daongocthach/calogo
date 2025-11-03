@@ -5,17 +5,16 @@ import {
   StyleSheet,
   TextInput,
   TextInputProps,
+  TextStyle,
   TouchableOpacity,
   View,
-  ViewStyle,
-  Platform,
-  TextStyle
+  ViewStyle
 } from 'react-native'
 
-import { useTheme } from '@/contexts/ThemeProvider'
-import { FONT_FAMILIES, FONT_SIZES } from '@/lib'
-import Icon from './Icon'
-import TextComponent from './TextComponent'
+import { FONT_FAMILIES } from '@/constants'
+import { useTheme } from "@/hooks"
+import Icon from './icon-component'
+import TextComponent from './text-component'
 
 interface CustomTextInputProps extends TextInputProps {
   style?: TextInputProps['style']
@@ -58,7 +57,7 @@ const CustomTextInput = ({
   ...props
 }: CustomTextInputProps) => {
   const { t } = useTranslation()
-  const { colors } = useTheme()
+  const colors = useTheme()
   const [showPassword, setShowPassword] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
 
@@ -147,8 +146,6 @@ const CustomTextInput = ({
             {
               color: colors.onBackground,
               fontFamily: FONT_FAMILIES.REGULAR,
-              fontSize: FONT_SIZES.BODY,
-              lineHeight: FONT_SIZES.BODY * (Platform.OS === 'android' ? 1.8 : 1.44),
               textAlignVertical: textAlignVertical,
               paddingRight: canShowClear || rightIcon ? 30 : 0
             },
@@ -169,7 +166,7 @@ const CustomTextInput = ({
               borderRadius: 12,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: colors.elevation.level2,
+              backgroundColor: colors.level2,
             }}
             hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
           >
@@ -212,7 +209,6 @@ const CustomTextInput = ({
           text={errorMessage}
           style={{
             color: colors.error,
-            fontSize: FONT_SIZES.BODY,
             marginTop: 6,
           }}
         />
@@ -238,7 +234,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: FONT_SIZES.BODY,
     fontFamily: FONT_FAMILIES.REGULAR,
   },
 })

@@ -4,11 +4,13 @@ import { TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
 import { RadioButton } from 'react-native-paper'
 
-import { useTheme } from '@/contexts/ThemeProvider'
-import { DropdownProps, FONT_FAMILIES, gaugesType, windowWidth } from '@/lib'
+import { FONT_FAMILIES, windowWidth } from '@/constants'
+import { useTheme } from "@/hooks"
+import { DropdownProps } from '@/types'
+
 import ColumnComponent from './column-component'
 import Icon from './icon-component'
-import ImageComponent from './ImageComponent'
+import ImageComponent from './image-component'
 import RowComponent from './row-component'
 import TextComponent from './text-component'
 
@@ -46,7 +48,7 @@ const InlineDropdown = ({
   labelColor,
 }: InlineDropdownProps) => {
   const { t } = useTranslation()
-  const { colors } = useTheme()
+  const colors = useTheme()
   const dropdownRef = useRef<any>(null)
 
   const dataTranslated = useMemo(
@@ -143,21 +145,21 @@ const InlineDropdown = ({
                       onPress={() => setSelect(item.value)}
                     />
                     <ImageComponent
-                      source={gaugesType[item?.value]?.image}
+                      source={undefined}
                       style={{ width: 80, height: 80, borderRadius: 8 }}
                       resizeMode="cover"
                     />
                   </RowComponent>
                   <ColumnComponent>
                     <TextComponent
-                      text={t(gaugesType[item?.value]?.title)}
+                      text={item.label}
                       color={isSelected ? "primary" : "onBackground"}
                     />
                     <TextComponent
                       size={12}
                       color="onSurface"
                       style={{ maxWidth: windowWidth * 0.5 }}
-                      text={gaugesType[item?.value]?.detail}
+                      text={item.detail}
                     />
                   </ColumnComponent>
                 </RowComponent>
@@ -199,7 +201,7 @@ const InlineDropdown = ({
               borderRadius: 12,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: colors.elevation.level2,
+              backgroundColor: colors.level2,
             }}
             hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
           >
