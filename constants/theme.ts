@@ -2,11 +2,9 @@ import { Platform } from 'react-native';
 
 export const Colors = {
   light: {
-    text: '#11181C',
+    text: '#111111',
     tint: '#4FD1C5',
-    icon: '#94A3B8',
-    tabIconDefault: '#A0A0A0',
-    tabIconSelected: '#4FD1C5',
+    icon: '#6B7280',
 
     background: '#FFFFFF',
     onBackground: '#1E293B',

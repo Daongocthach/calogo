@@ -18,10 +18,6 @@ const Header = ({
   const colors = useTheme()
   const insets = useSafeAreaInsets()
 
-  const handleBack = () => {
-    router.back()
-  }
-
   return (
     <View style={{ backgroundColor: colors.background, paddingTop: insets.top }}>
       <RowComponent
@@ -35,12 +31,12 @@ const Header = ({
           marginBottom: 10,
         }}>
         <RowComponent
-          onPress={handleBack}
+          onPress={() => router.back()}
           justify='flex-start'
           gap={10}
           style={{ flex: 1 }}
         >
-          <Icon name="ChevronLeft" size={30} color="onSurfaceVariant" />
+          <Icon name="ArrowLeft" size={30} color="primary" />
           <TextComponent
             numberOfLines={1}
             style={{ color: colors.onSurfaceVariant, width: '80%' }}

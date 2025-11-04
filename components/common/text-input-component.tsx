@@ -36,7 +36,7 @@ interface CustomTextInputProps extends TextInputProps {
   labelStyle?: TextStyle
 }
 
-const CustomTextInput = ({
+const TextInputComponent = ({
   isSearch = false,
   isPassword = false,
   isDropdown = false,
@@ -238,4 +238,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CustomTextInput
+export default TextInputComponent

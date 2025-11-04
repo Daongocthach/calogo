@@ -1,4 +1,13 @@
 export type ThemeColors = {
+    text: string,
+    tint: string,
+    icon: string,
+
+    background: string
+    onBackground: string
+    surface: string
+    onSurface: string
+
     primary: string
     onPrimary: string
     primaryContainer: string
@@ -18,11 +27,6 @@ export type ThemeColors = {
     onError: string
     errorContainer: string
     onErrorContainer: string
-
-    background: string
-    onBackground: string
-    surface: string
-    onSurface: string
 
     surfaceVariant: string
     onSurfaceVariant: string

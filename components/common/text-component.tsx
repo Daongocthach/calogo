@@ -10,12 +10,11 @@ interface TextComponentProps extends TextProps {
   style?: StyleProp<TextStyle>
   text?: string
   size?: number
-  weight?: TextStyle['fontWeight']
-  font?: 'regular' | 'medium' | 'semibold' | 'bold'
-  color?: ThemeColorKeys
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
-  textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify'
   lineHeight?: number
+  color?: ThemeColorKeys
+  fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold'
+  textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify'
+  type?: 'default' | 'title' | 'subtitle' | 'link'
 }
 
 const TextComponent = ({
@@ -23,11 +22,10 @@ const TextComponent = ({
   style,
   text,
   size,
-  weight,
-  font = 'regular',
+  fontWeight = 'regular',
+  type = 'default',
   textAlign,
   color,
-  type,
   lineHeight,
   ...props
 }: TextComponentProps) => {
@@ -35,7 +33,7 @@ const TextComponent = ({
   const colors = useTheme()
   const { t } = useTranslation()
 
-  const getFontFamily = (fontFamily: typeof font) => {
+  const getFontFamily = (fontFamily: typeof fontWeight) => {
     switch (fontFamily) {
       case 'medium':
         return FONT_FAMILIES.MEDIUM
@@ -53,15 +51,13 @@ const TextComponent = ({
       {...props}
       style={[
         {
-          color: color ? color : colors.text,
+          color: colors.text,
           fontSize: size,
-          fontFamily: getFontFamily(font),
-          fontWeight: weight ?? 'normal',
+          fontFamily: getFontFamily(fontWeight),
           textAlign: textAlign ?? 'left',
         },
         type === 'default' ? styles.default : undefined,
         type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
         type === 'subtitle' ? styles.subtitle : undefined,
         type === 'link' ? styles.link : undefined,
         style,
@@ -79,11 +75,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
   },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: '600',
-  },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
@@ -96,6 +87,5 @@ const styles = StyleSheet.create({
   link: {
     lineHeight: 30,
     fontSize: 16,
-    color: '#0a7ea4',
   },
 });

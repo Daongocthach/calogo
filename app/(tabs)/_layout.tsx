@@ -35,7 +35,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
-        headerShown: false,
+        headerShown: true,
         tabBarButton: HapticTab,
       }}>
       {screens.map((screen) => (
@@ -43,7 +43,7 @@ export default function TabLayout() {
           key={screen.name}
           name={screen.name}
           options={{
-            header: () => <Header title={screen.title}/>,
+            header: () => <Header title={screen.title} />,
             title: t(screen.title),
             tabBarIcon: ({ color }) => (
               <IconComponent size={24} name={screen.icon} color={color} />

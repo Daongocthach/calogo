@@ -1,6 +1,6 @@
 export const FONT_FAMILIES = {
-    REGULAR: 'Poppins-Regular',
-    MEDIUM: 'Poppins-Medium',
-    SEMIBOLD: 'Poppins-SemiBold',
-    BOLD: 'Poppins-Bold',
+    REGULAR: 'Inter-Regular',
+    MEDIUM: 'Inter-Medium',
+    SEMIBOLD: 'Inter-SemiBold',
+    BOLD: 'Inter-Bold',
 }
