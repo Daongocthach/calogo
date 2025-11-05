@@ -4,9 +4,9 @@ import { TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
 import { RadioButton } from 'react-native-paper'
 
-import { FONT_FAMILIES, windowWidth } from '@/constants'
 import { useTheme } from "@/hooks"
-import { DropdownProps } from '@/types'
+import { FONT_FAMILIES, windowWidth } from '@/lib/constants'
+import { DropdownProps } from '@/lib/types'
 
 import ColumnComponent from './column-component'
 import Icon from './icon-component'
@@ -48,7 +48,7 @@ const InlineDropdown = ({
   labelColor,
 }: InlineDropdownProps) => {
   const { t } = useTranslation()
-  const colors = useTheme()
+  const { colors } = useTheme()
   const dropdownRef = useRef<any>(null)
 
   const dataTranslated = useMemo(
@@ -65,7 +65,7 @@ const InlineDropdown = ({
       {!!label && (
         <TextComponent
           text={label}
-          font='semibold'
+          fontWeight='semibold'
           color={labelColor || "onSurface"}
           style={{ marginBottom: 4 }}
         />

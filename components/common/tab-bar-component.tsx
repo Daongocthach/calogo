@@ -5,7 +5,7 @@ import ColumnComponent from "./column-component"
 import TextComponent from "./text-component"
 
 function TabBarComponent(props: any) {
-    const colors = useTheme()
+    const { colors } = useTheme()
     const { index: activeIndex, routes } = props.navigationState
 
     return (
@@ -29,7 +29,7 @@ function TabBarComponent(props: any) {
                             <TextComponent
                                 numberOfLines={1}
                                 textAlign="center"
-                                font={'medium'}
+                                fontWeight={'medium'}
                                 style={{ color: isFocused ? colors.onPrimary : colors.onSurfaceVariant, width: '100%' }}
                                 text={route.title}
                             />

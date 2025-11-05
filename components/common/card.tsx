@@ -15,7 +15,7 @@ interface Props extends TouchableOpacityProps {
 const CardContainer = (props: Props) => {
     const { darkMode } = useStore()
     const { children, style, cardColor, isBlur, blurIntensity = 100, ...rest } = props
-    const colors = useTheme()
+    const { colors } = useTheme()
 
     if (isBlur) {
         return (

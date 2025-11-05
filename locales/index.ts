@@ -1,7 +1,7 @@
 import i18next from "i18next"
 import { initReactI18next } from "react-i18next"
 
-import { getCurrentLanguage } from "@/utils"
+import { getCurrentLanguage } from "@/lib/utils"
 import DATA_EN from "./en/data.json"
 import DATA_VI from "./vi/data.json"
 import DATA_ZH_CN from "./zh-CN/data.json"

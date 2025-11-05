@@ -1,8 +1,8 @@
 import { StyleProp, View, ViewStyle } from 'react-native'
 import { NavigationState, SceneRendererProps, TabView } from 'react-native-tab-view'
 
-import { windowWidth } from '@/constants'
-import { Route } from '@/types'
+import { windowWidth } from '@/lib/constants'
+import { Route } from '@/lib/types'
 import { renderTabBar as defaultRenderTabBar } from './tab-bar-component'
 
 

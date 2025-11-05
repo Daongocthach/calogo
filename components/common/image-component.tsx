@@ -14,7 +14,7 @@ interface ImageComponentProps extends ImageProps {
 
 const ImageComponent = (props: ImageComponentProps) => {
   const { ImageViewerModal, open } = useImageViewerModal()
-  const colors = useTheme()
+  const { colors } = useTheme()
   const {
     uri,
     source,
@@ -54,7 +54,7 @@ const ImageComponent = (props: ImageComponentProps) => {
           style={[{
             width: '100%',
             height: '100%',
-            backgroundColor: isOutline ? 'transparent' : colors.surface,
+            backgroundColor: isOutline ? 'transparent' : colors.background,
             borderWidth: isOutline ? 1 : 0,
             borderColor: isOutline ? colors.outlineVariant : 'transparent',
             borderRadius: 8,

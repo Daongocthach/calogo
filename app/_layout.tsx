@@ -1,4 +1,3 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
@@ -10,10 +9,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'react-native-reanimated'
 import Toast from 'react-native-toast-message'
 
-import { GlobalAlertProvider } from '@/alerts/global-alert-provider'
 import LoadingScreen from '@/components/common/loading-screen'
-import { FONT_FAMILIES } from '@/constants'
-import { useColorScheme } from '@/hooks/use-color-scheme'
+import { GlobalAlertProvider } from '@/contexts/global-alert-provider'
+import { ThemeProvider } from '@/contexts/theme-provider'
+import { FONT_FAMILIES } from '@/lib/constants'
 import i18next from '@/locales'
 
 const queryClient = new QueryClient({
@@ -34,7 +33,6 @@ const queryClient = new QueryClient({
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme()
   const [loaded] = useFonts({
     [FONT_FAMILIES.REGULAR]: require('../assets/fonts/Inter-Regular.ttf'),
     [FONT_FAMILIES.MEDIUM]: require('../assets/fonts/Inter-Medium.ttf'),
@@ -53,7 +51,7 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <GlobalAlertProvider>
           <QueryClientProvider client={queryClient}>

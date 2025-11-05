@@ -15,7 +15,7 @@ export default function Checkbox({
   style,
   tickColor,
 }: CheckboxProps) {
-  const colors = useTheme()
+  const { colors } = useTheme()
   return (
     <TouchableOpacity
       onPress={() => setChecked && setChecked(!checked)}

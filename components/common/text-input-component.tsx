@@ -11,8 +11,8 @@ import {
   ViewStyle
 } from 'react-native'
 
-import { FONT_FAMILIES } from '@/constants'
 import { useTheme } from "@/hooks"
+import { FONT_FAMILIES } from '@/lib/constants'
 import Icon from './icon-component'
 import TextComponent from './text-component'
 
@@ -57,7 +57,7 @@ const TextInputComponent = ({
   ...props
 }: CustomTextInputProps) => {
   const { t } = useTranslation()
-  const colors = useTheme()
+  const { colors } = useTheme()
   const [showPassword, setShowPassword] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
 
@@ -109,7 +109,7 @@ const TextInputComponent = ({
       {label &&
         <TextComponent
           text={label}
-          font='medium'
+          fontWeight='medium'
           size={12}
           style={[{ marginBottom: 2 }, labelStyle]}
           color={labelColor || "onSurface"}

@@ -1,5 +1,6 @@
-import { useTheme } from '@/hooks/use-theme'
-import { ThemeColors } from '@/types'
+import { useTheme } from '@/hooks'
+import { useGetColorByKey } from '@/hooks/use-get-color-by-key'
+import { ThemeColorKeys } from '@/lib/types'
 import MaskedView from '@react-native-masked-view/masked-view'
 import { LinearGradient } from 'expo-linear-gradient'
 import { icons } from 'lucide-react-native'
@@ -8,7 +9,7 @@ import { ViewStyle } from 'react-native'
 
 type IconComponentProps = {
   name: keyof typeof icons
-  color?: keyof ThemeColors | (string & {})
+  color?: ThemeColorKeys
   size?: number
   style?: ViewStyle
   gradientColors?: [string, string, ...string[]]
@@ -21,7 +22,8 @@ const IconComponent = ({
   style,
   gradientColors = undefined,
 }: IconComponentProps) => {
-  const colors = useTheme()
+  const { getColorByKey } = useGetColorByKey()
+  const { colors } = useTheme()
   const LucideIcon = icons[name]
   if (!LucideIcon) return null
 
@@ -49,7 +51,7 @@ const IconComponent = ({
 
   return (
     <LucideIcon
-      color={color ? color : colors.icon}
+      color={color ? getColorByKey(color) : colors.icon}
       width={size}
       height={size}
       style={style}

@@ -1,9 +1,9 @@
 import { create } from "zustand"
 import { createJSONStorage, devtools, persist } from "zustand/middleware"
 
-import { STORE_NAME } from "@/constants"
+import { STORE_NAME } from "@/lib/constants"
+import { User } from "@/lib/types"
 import { asyncStorage } from "@/store/storage"
-import { User } from "@/types"
 
 type StoreState = {
   darkMode: boolean

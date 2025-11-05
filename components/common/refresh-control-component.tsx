@@ -5,7 +5,7 @@ import { RefreshControl, RefreshControlProps } from 'react-native'
 
 
 const RefreshControlComponent = (props: RefreshControlProps) => {
-    const colors = useTheme()
+    const { colors } = useTheme()
 
     return (
         <RefreshControl

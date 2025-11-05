@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Calendar } from 'react-native-calendars';
 
 export default function HomeScreen() {
   const [selected, setSelected] = useState('');
@@ -8,19 +7,6 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Lịch làm việc</Text>
-
-      <Calendar
-        
-        onDayPress={(day) => setSelected(day.dateString)}
-        markedDates={{
-          [selected]: { selected: true, selectedColor: '#00adf5' },
-        }}
-        theme={{
-          todayTextColor: '#ff6347',
-          arrowColor: '#00adf5',
-        }}
-      />
-
       {selected ? (
         <Text style={styles.selectedDate}>Ngày đã chọn: {selected}</Text>
       ) : (

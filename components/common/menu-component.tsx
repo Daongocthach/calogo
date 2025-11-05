@@ -22,7 +22,7 @@ const MenuComponent = ({
   fullWidth = true,
   disabled = false,
 }: MenuComponentProps): ReactElement => {
-  const colors = useTheme()
+  const { colors } = useTheme()
   const [visible, setVisible] = useState(false)
   const [triggerWidth, setTriggerWidth] = useState(0)
 

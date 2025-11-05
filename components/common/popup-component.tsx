@@ -7,7 +7,7 @@ import {
 } from "react-native"
 
 import { useTheme } from "@/hooks"
-import { ThemeColorKeys } from '@/types'
+import { ThemeColorKeys } from '@/lib/types'
 import { ScrollView } from "react-native-gesture-handler"
 import Icon from "./icon-component"
 import SpaceComponent from "./space-component"
@@ -52,7 +52,7 @@ const PopupComponent = ({
   onClose,
   handle,
 }: ModalProps) => {
-  const colors = useTheme()
+  const { colors } = useTheme()
   const handleConfirm = () => {
     if (handle) {
       handle()
@@ -128,7 +128,7 @@ const PopupComponent = ({
                         text={buttonTitle || "confirm"}
                         color="onPrimary"
                         textAlign="center"
-                        font={'medium'}
+                        fontWeight={'medium'}
                       />
                     </TouchableOpacity>
                   </View>
@@ -143,7 +143,7 @@ const PopupComponent = ({
                         style={styles.cancelText}
                         color="onSurface"
                         text="cancel"
-                        font="medium"
+                        fontWeight={'medium'}
                       />
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -157,7 +157,7 @@ const PopupComponent = ({
                           { color: disabled ? "#888" : buttonColor },
                         ]}
                         text={buttonTitle || "yes"}
-                        font="medium"
+                        fontWeight={'medium'}
                       />
                     </TouchableOpacity>
                   </View>

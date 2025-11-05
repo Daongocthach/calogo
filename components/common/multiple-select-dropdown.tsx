@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View, ViewStyle } from 'react-native'
 import { MultiSelect } from 'react-native-element-dropdown'
 
-import { FONT_FAMILIES } from '@/constants'
 import { useTheme } from "@/hooks"
-import { DropdownProps } from '@/types'
+import { FONT_FAMILIES } from '@/lib/constants'
+import { DropdownProps } from '@/lib/types'
 import Checkbox from './check-box'
 import Icon from './icon-component'
 import RowComponent from './row-component'
@@ -40,7 +40,7 @@ const MultiSelectDropdown = ({
   loading = false,
 }: MultiSelectDropdownProps) => {
   const { t } = useTranslation()
-  const colors = useTheme()
+  const { colors } = useTheme()
 
   const dataTranslated = useMemo(
     () => data.map(item => ({ ...item, label: t(item.label) })),
@@ -61,7 +61,7 @@ const MultiSelectDropdown = ({
           text={label}
           style={{ marginBottom: 6 }}
           color="onSurface"
-          font="semibold"
+          fontWeight={'medium'}
         />
       )}
 

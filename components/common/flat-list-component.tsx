@@ -1,9 +1,9 @@
-import { windowHeight } from '@/constants'
 import { useTheme } from "@/hooks"
+import { windowHeight } from '@/lib/constants'
 import {
-    FlatList,
-    FlatListProps,
-    ListRenderItem
+  FlatList,
+  FlatListProps,
+  ListRenderItem
 } from 'react-native'
 import RefreshControlComponent from './refresh-control-component'
 import TextComponent from './text-component'
@@ -42,7 +42,7 @@ export default function FlatListComponent({
     contentContainerStyle,
     ...props
 }: FlatListComponentProps) {
-    const colors = useTheme()
+    const { colors } = useTheme()
     return (
         <FlatList
             data={data}

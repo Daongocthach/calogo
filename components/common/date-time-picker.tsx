@@ -27,7 +27,7 @@ const DateTimePickerComponent = ({
   placeholder = 'select date',
 }: DateTimePickerComponentProps) => {
   const { currentLanguage } = useStore()
-  const colors = useTheme()
+  const { colors } = useTheme()
 
   const [showPicker, setShowPicker] = useState(false)
   const [showDatePicker, setShowDatePicker] = useState(false)
@@ -115,7 +115,7 @@ const DateTimePickerComponent = ({
         <TextComponent
           style={styles.title}
           text={label}
-          font='semibold'
+          fontWeight='semibold'
           color="onSurface"
         />
       )}

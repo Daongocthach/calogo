@@ -9,6 +9,7 @@ const screens = [
     name: 'index',
     title: 'meals',
     icon: 'Utensils' as const,
+    isMealsScreen: true,
   },
   {
     name: 'foods',
@@ -29,7 +30,7 @@ const screens = [
 
 export default function TabLayout() {
   const { t } = useTranslation()
-  const colors = useTheme()
+  const { colors } = useTheme()
 
   return (
     <Tabs
@@ -43,8 +44,9 @@ export default function TabLayout() {
           key={screen.name}
           name={screen.name}
           options={{
-            header: () => <Header title={screen.title} />,
+            header: () => <Header title={screen.title} isMealsScreen={screen.isMealsScreen} />,
             title: t(screen.title),
+            tabBarIconStyle: { color: colors.icon },
             tabBarIcon: ({ color }) => (
               <IconComponent size={24} name={screen.icon} color={color} />
             ),

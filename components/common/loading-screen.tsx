@@ -8,7 +8,7 @@ interface LoadingProps extends ViewProps {
 }
 
 const LoadingScreen = ({ progress, ...props }: LoadingProps) => {
-    const colors = useTheme()
+    const { colors } = useTheme()
 
     return (
         <View

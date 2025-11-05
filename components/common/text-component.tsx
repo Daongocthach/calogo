@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { StyleProp, StyleSheet, Text, TextProps, TextStyle } from 'react-native'
 
-import { FONT_FAMILIES } from '@/constants/ui'
 import { useTheme } from '@/hooks'
-import { ThemeColorKeys } from '@/types'
+import { useGetColorByKey } from '@/hooks/use-get-color-by-key'
+import { FONT_FAMILIES } from '@/lib/constants/ui'
+import { ThemeColorKeys } from '@/lib/types'
 
 interface TextComponentProps extends TextProps {
   children?: React.ReactNode
@@ -29,9 +30,9 @@ const TextComponent = ({
   lineHeight,
   ...props
 }: TextComponentProps) => {
-  if (!text && !children) return null
-  const colors = useTheme()
+  const { colors } = useTheme()
   const { t } = useTranslation()
+  const { getColorByKey } = useGetColorByKey()
 
   const getFontFamily = (fontFamily: typeof fontWeight) => {
     switch (fontFamily) {
@@ -51,7 +52,7 @@ const TextComponent = ({
       {...props}
       style={[
         {
-          color: colors.text,
+          color: color ? getColorByKey(color) : colors.text,
           fontSize: size,
           fontFamily: getFontFamily(fontWeight),
           textAlign: textAlign ?? 'left',
@@ -72,20 +73,22 @@ export default TextComponent
 
 const styles = StyleSheet.create({
   default: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: 14,
+    lineHeight: 15,
+    fontFamily: FONT_FAMILIES.REGULAR,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    lineHeight: 32,
+    fontSize: 18,
+    lineHeight: 28,
+    fontFamily: FONT_FAMILIES.SEMIBOLD,
   },
   subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontFamily: FONT_FAMILIES.REGULAR,
   },
   link: {
-    lineHeight: 30,
-    fontSize: 16,
+    lineHeight: 15,
+    fontSize: 14,
+    fontFamily: FONT_FAMILIES.REGULAR,
   },
 });
