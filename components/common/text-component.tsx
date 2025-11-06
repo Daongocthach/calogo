@@ -6,6 +6,15 @@ import { useGetColorByKey } from '@/hooks/use-get-color-by-key'
 import { FONT_FAMILIES } from '@/lib/constants/ui'
 import { ThemeColorKeys } from '@/lib/types'
 
+type TextType =
+  | 'display'
+  | 'title1'
+  | 'title2'
+  | 'body'
+  | 'caption'
+  | 'label'
+  | 'link'
+
 interface TextComponentProps extends TextProps {
   children?: React.ReactNode
   style?: StyleProp<TextStyle>
@@ -15,7 +24,7 @@ interface TextComponentProps extends TextProps {
   color?: ThemeColorKeys
   fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold'
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify'
-  type?: 'default' | 'title' | 'subtitle' | 'link'
+  type?: TextType
 }
 
 const TextComponent = ({
@@ -24,7 +33,7 @@ const TextComponent = ({
   text,
   size,
   fontWeight = 'regular',
-  type = 'default',
+  type = 'body',
   textAlign,
   color,
   lineHeight,
@@ -47,20 +56,25 @@ const TextComponent = ({
     }
   }
 
+  const resolvedColor =
+    color
+      ? getColorByKey(color)
+      : ['caption', 'label'].includes(type)
+        ? colors.icon
+        : colors.text
+
   return (
     <Text
       {...props}
       style={[
         {
-          color: color ? getColorByKey(color) : colors.text,
-          fontSize: size,
-          fontFamily: getFontFamily(fontWeight),
+          color: resolvedColor,
           textAlign: textAlign ?? 'left',
+          fontFamily: getFontFamily(fontWeight),
+          fontSize: size,
+          lineHeight,
         },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
+        styles[type],
         style,
       ]}
     >
@@ -72,23 +86,40 @@ const TextComponent = ({
 export default TextComponent
 
 const styles = StyleSheet.create({
-  default: {
-    fontSize: 14,
-    lineHeight: 15,
-    fontFamily: FONT_FAMILIES.REGULAR,
-  },
-  title: {
-    fontSize: 18,
-    lineHeight: 28,
+  display: {
+    fontSize: 20,
+    lineHeight: 25,
     fontFamily: FONT_FAMILIES.SEMIBOLD,
   },
-  subtitle: {
+  title1: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontFamily: FONT_FAMILIES.SEMIBOLD,
+  },
+  title2: {
     fontSize: 14,
+    lineHeight: 22,
+    fontFamily: FONT_FAMILIES.MEDIUM,
+  },
+  body: {
+    fontSize: 14,
+    lineHeight: 20,
+    fontFamily: FONT_FAMILIES.REGULAR,
+  },
+  caption: {
+    fontSize: 12,
+    lineHeight: 16,
+    fontFamily: FONT_FAMILIES.REGULAR,
+  },
+  label: {
+    fontSize: 13,
+    lineHeight: 18,
     fontFamily: FONT_FAMILIES.REGULAR,
   },
   link: {
-    lineHeight: 15,
     fontSize: 14,
+    lineHeight: 18,
     fontFamily: FONT_FAMILIES.REGULAR,
+    textDecorationLine: 'underline',
   },
-});
+})

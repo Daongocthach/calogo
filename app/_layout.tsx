@@ -52,7 +52,7 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView>
         <GlobalAlertProvider>
           <QueryClientProvider client={queryClient}>
             <I18nextProvider i18n={i18next}>

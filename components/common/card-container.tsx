@@ -4,7 +4,7 @@ import { BlurView } from 'expo-blur'
 import React, { ReactNode } from 'react'
 import { StyleProp, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native'
 
-interface Props extends TouchableOpacityProps {
+interface CardContainerProps extends TouchableOpacityProps {
     children?: ReactNode
     cardColor?: string
     style?: StyleProp<ViewStyle>
@@ -12,9 +12,15 @@ interface Props extends TouchableOpacityProps {
     blurIntensity?: number
 }
 
-const CardContainer = (props: Props) => {
+const CardContainer = ({
+    children, 
+    style,
+    cardColor, 
+    isBlur, 
+    blurIntensity = 100, 
+    ...rest
+}: CardContainerProps) => {
     const { darkMode } = useStore()
-    const { children, style, cardColor, isBlur, blurIntensity = 100, ...rest } = props
     const { colors } = useTheme()
 
     if (isBlur) {
@@ -58,10 +64,10 @@ const CardContainer = (props: Props) => {
             {...rest}
             activeOpacity={0.9}
             style={[{
-                backgroundColor: cardColor || colors.surfaceVariant,
+                backgroundColor: cardColor || colors.background,
                 borderRadius: 8,
                 padding: 20,
-                elevation: 1,
+                elevation: 1.5,
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,

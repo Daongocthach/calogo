@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { ScrollView, View, ViewStyle } from 'react-native'
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated'
-import { Edge, SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context'
+import { SafeAreaViewProps } from 'react-native-safe-area-context'
 
 import { useTheme } from '@/hooks'
 
@@ -35,7 +35,7 @@ const Container = ({
   const contentProps = {
     contentContainerStyle: [
       {
-        paddingHorizontal: 12,
+        paddingHorizontal: 0,
         flex: isScroll ? undefined : 1,
       },
       contentContainerStyle,
@@ -55,24 +55,13 @@ const Container = ({
     <Animated.View
       entering={entering}
       exiting={exiting}
-      style={{ flex: 1 }}
+      style={{
+        flex: 1,
+        paddingHorizontal: 12,
+        backgroundColor: colors.background
+      }}
     >
-      <SafeAreaView
-        style={[
-          {
-            flex: 1,
-            backgroundColor: colors.background,
-            height: '100%',
-            width: '100%',
-            paddingBottom: 5,
-          },
-          style,
-        ]}
-        edges={['left', 'right', ...(isBottomTab ? [] : ['bottom']) as Edge[]]}
-        {...props}
-      >
-        {renderContent()}
-      </SafeAreaView>
+      {renderContent()}
     </Animated.View>
   )
 }

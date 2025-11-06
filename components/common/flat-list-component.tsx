@@ -1,9 +1,8 @@
 import { useTheme } from "@/hooks"
-import { windowHeight } from '@/lib/constants'
 import {
-  FlatList,
-  FlatListProps,
-  ListRenderItem
+    FlatList,
+    FlatListProps,
+    ListRenderItem
 } from 'react-native'
 import RefreshControlComponent from './refresh-control-component'
 import TextComponent from './text-component'
@@ -66,7 +65,7 @@ export default function FlatListComponent({
                     <TextComponent
                         style={{
                             textAlign: 'center',
-                            marginTop: 32,
+                            marginVertical: 16,
                             color: colors.outlineVariant
                         }}
                         text={isError ? 'error loading data' : 'no data found'}
@@ -76,14 +75,22 @@ export default function FlatListComponent({
             ListFooterComponent={
                 (isLoading || isFetchingNextPage) ? (
                     <TextComponent
-                        style={{ textAlign: 'center', marginVertical: 16, color: colors.outlineVariant }}
+                        style={{
+                            textAlign: 'center',
+                            marginVertical: 16,
+                            color: colors.outlineVariant
+                        }}
                         text="loading"
                     />
                 ) : data.length > 0 ? (
                     (
                         <TextComponent
-                            style={{ textAlign: 'center', marginVertical: 16, color: colors.outlineVariant }}
-                            text="end of list"
+                            style={{
+                                textAlign: 'center',
+                                marginVertical: 16,
+                                color: colors.outlineVariant
+                            }}
+                            text="end of page"
                         />
                     )
                 ) : null
@@ -92,14 +99,11 @@ export default function FlatListComponent({
                 columnWrapperStyle: [{
                     justifyContent: 'space-between',
                     gap: 8,
-                    marginBottom: 8,
                 }, columnWrapperStyle],
             })}
             contentContainerStyle={[{
                 paddingHorizontal: 2,
                 gap: 8,
-                flexGrow: 1,
-                paddingBottom: windowHeight * 0.2,
             }, contentContainerStyle]}
             {...props}
         />

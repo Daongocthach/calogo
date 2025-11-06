@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import IMAGES from '@/assets/images'
 import { useTheme } from "@/hooks"
+import { format } from 'date-fns'
 import ColumnComponent from './column-component'
 import Icon from './icon-component'
 import ImageComponent from './image-component'
@@ -24,12 +25,16 @@ const Header = ({
   const insets = useSafeAreaInsets()
 
   return (
-    <View style={{ backgroundColor: colors.background, paddingTop: insets.top }}>
+    <View
+      style={{
+        backgroundColor: colors.background,
+        paddingTop: insets.top,
+        paddingHorizontal: 16,
+      }}>
       <RowComponent
         justify='space-between'
         gap={5}
         style={{
-          paddingHorizontal: 12,
           borderBottomWidth: 2.5,
           borderBottomColor: colors.surface,
           paddingVertical: 5,
@@ -47,35 +52,31 @@ const Header = ({
                 style={{ width: 50, height: 40, resizeMode: 'contain' }}
               />
               :
-              <Icon name="ArrowLeft" size={30} color="onBackground" />
+              <Icon name="ArrowLeft" size={25} color="onBackground" />
             }
           </View>
           {isMealsScreen ? (
             <ColumnComponent>
               <TextComponent
                 numberOfLines={1}
-                text={'today'}
+                text='today'
                 textAlign='center'
-                type='title'
+                type='display'
               />
               <TextComponent
                 numberOfLines={1}
                 style={{ color: colors.onSurfaceVariant, flex: 1 }}
-                text={'January 15, 2025'}
-                fontWeight={'medium'}
+                text={format(new Date(), 'MMMM dd, yyyy')}
+                fontWeight='medium'
                 textAlign='center'
-                type='subtitle'
               />
             </ColumnComponent>
           ) : (
             <TextComponent
               numberOfLines={1}
-              style={{ color: colors.onSurfaceVariant, flex: 1 }}
               text={title}
-              lineHeight={30}
-              fontWeight={'medium'}
-              size={18}
               textAlign='center'
+              type='display'
             />
           )}
           <View style={{ width: 20 }}>
