@@ -109,7 +109,7 @@ const TextInputComponent = ({
       {label &&
         <TextComponent
           text={label}
-          fontWeight='medium'
+          type="label"
           size={12}
           style={[{ marginBottom: 2 }, labelStyle]}
           color={labelColor || "onSurface"}
