@@ -2,108 +2,12 @@ import { icons } from 'lucide-react-native'
 import React from 'react'
 import { View } from 'react-native'
 
-import { CardContainer, ColumnComponent, Container, FlatListComponent, IconComponent, RowComponent, SpaceComponent, TextComponent } from '@/components'
+import { CardContainer, ColumnComponent, Container, FlatListComponent, IconComponent, RowComponent, TextComponent } from '@/components'
 import CircularProgressRing from '@/components/common/circle-progress'
 import PlusButton from '@/components/common/plus-button'
 import NutritionSummary from '@/components/meals/nutrion-summary'
 
-type meal = {
-  id: number,
-  type: string,
-  icon: string,
-  iconColor: string,
-  backgroundColor: string,
-  totalCalories: number
-  food: {
-    name: string,
-    quantity: string,
-    calories: number
-  }[]
-}
-
-const mockMeals = [
-  {
-    id: 1,
-    type: "Breakfast",
-    icon: "Sun",
-    iconColor: "#EAB308",
-    backgroundColor: "#FFE5B4",
-    totalCalories: 420,
-    food: [
-      {
-        name: "Oatmeal with berries",
-        quantity: "1 cup",
-        calories: 280,
-      },
-      {
-        name: "Greek yogurt",
-        quantity: "150g",
-        calories: 140,
-      },
-    ],
-  },
-  {
-    id: 2,
-    type: "Lunch",
-    icon: "Hamburger",
-    iconColor: "#F97316",
-    backgroundColor: "#FFEDD5",
-    totalCalories: 680,
-    food: [
-      {
-        name: "Grilled chicken salad",
-        quantity: "1 serving",
-        calories: 380,
-      },
-      {
-        name: "Quinoa",
-        quantity: "100g",
-        calories: 220,
-      },
-      {
-        name: "Avocado",
-        quantity: "1/2 medium",
-        calories: 80,
-      },
-    ],
-  },
-  {
-    id: 3,
-    type: "Dinner",
-    icon: "Utensils",
-    iconColor: "#A855F7",
-    backgroundColor: "#F3E8FF",
-    totalCalories: 440,
-    food: [
-      {
-        name: "Baked salmon",
-        quantity: "120g",
-        calories: 280,
-      },
-      {
-        name: "Steamed broccoli",
-        quantity: "1 cup",
-        calories: 55,
-      },
-      {
-        name: "Brown rice",
-        quantity: "1/2 cup",
-        calories: 105,
-      },
-    ],
-  },
-  {
-    id: 4,
-    type: "Snacks",
-    icon: "Apple",
-    iconColor: "#22C55E",
-    backgroundColor: "#DCFCE7",
-    totalCalories: 0,
-    food: [],
-  },
-]
-
-const MealIcon = ({
+const FoodCard = ({
   icon,
   iconColor,
   backgroundColor
@@ -125,7 +29,6 @@ export default function Foods() {
 
   return (
     <Container>
-      <SpaceComponent height={10} />
       <FlatListComponent
         data={mockMeals}
         keyExtractor={(item) => item.id.toString()}
