@@ -2,9 +2,8 @@ import { icons } from 'lucide-react-native'
 import React from 'react'
 import { View } from 'react-native'
 
-import { CardContainer, ColumnComponent, Container, FlatListComponent, IconComponent, RowComponent, SpaceComponent, TextComponent } from '@/components'
+import { CardContainer, ColumnComponent, IconComponent, ParallaxScrollView, RowComponent, TextComponent } from '@/components'
 import CircularProgressRing from '@/components/common/circle-progress'
-import PlusButton from '@/components/common/plus-button'
 import NutritionSummary from '@/components/meals/nutrion-summary'
 
 type meal = {
@@ -124,51 +123,53 @@ const MealIcon = ({
 export default function HomeScreen() {
 
   return (
-    <Container>
-      <SpaceComponent height={10} />
-      <FlatListComponent
-        data={mockMeals}
-        keyExtractor={(item) => item.id.toString()}
-        ListHeaderComponent={
-          <ColumnComponent alignItems='center' gap={10} style={{ marginBottom: 10 }} >
+    <ParallaxScrollView
+        headerImage={
+          <ColumnComponent alignItems='center' gap={10}>
             <CircularProgressRing value={1540} goal={2000} size={120} strokeWidth={10} />
             <NutritionSummary remaining={460} protein={78} fat={52} />
           </ColumnComponent>
         }
-        renderItem={({ item }: { item: meal }) => (
-          <CardContainer>
-            <ColumnComponent gap={15}>
-              <RowComponent justify='space-between'>
-                <RowComponent gap={10}>
-                  <MealIcon
-                    icon={item?.icon as keyof typeof icons}
-                    iconColor={item?.iconColor}
-                    backgroundColor={item?.backgroundColor}
-                  />
-                  <TextComponent text={item?.type} type='title1' />
+      >
+        <>
+          {mockMeals.map((item: meal) => (
+            <CardContainer key={item.id}>
+              <ColumnComponent gap={15}>
+                <RowComponent justify='space-between'>
+                  <RowComponent gap={10}>
+                    <MealIcon
+                      icon={item.icon as keyof typeof icons}
+                      iconColor={item.iconColor}
+                      backgroundColor={item.backgroundColor}
+                    />
+                    <TextComponent text={item.type} type='title1' />
+                  </RowComponent>
+                  <TextComponent text={`${item.totalCalories} kcal`} type='label' />
                 </RowComponent>
-                <TextComponent text={`${item.totalCalories} kcal`} type='label' />
-              </RowComponent>
-              <ColumnComponent gap={10}>
-                {item.food.length > 0 ? (
-                  item.food.map((foodItem, index) => (
-                    <RowComponent key={`${foodItem.name}-${index}`} justify='space-between'>
-                      <ColumnComponent>
-                        <TextComponent text={foodItem?.name} type='title2' />
-                        <TextComponent text={foodItem?.quantity} type='caption' />
-                      </ColumnComponent>
-                      <TextComponent text={`${foodItem?.calories} kcal`} type='label' />
-                    </RowComponent>
-                  ))
-                ) : (
-                  <TextComponent text='No snacks added yet' type='label' textAlign='center' />
-                )}
+
+                <ColumnComponent gap={10}>
+                  {item.food.length > 0 ? (
+                    item.food.map((foodItem, index) => (
+                      <RowComponent key={`${foodItem.name}-${index}`} justify='space-between'>
+                        <ColumnComponent>
+                          <TextComponent text={foodItem.name} type='title2' />
+                          <TextComponent text={foodItem.quantity} type='caption' />
+                        </ColumnComponent>
+                        <TextComponent text={`${foodItem.calories} kcal`} type='label' />
+                      </RowComponent>
+                    ))
+                  ) : (
+                    <TextComponent
+                      text='No snacks added yet'
+                      type='label'
+                      textAlign='center'
+                    />
+                  )}
+                </ColumnComponent>
               </ColumnComponent>
-            </ColumnComponent>
-          </CardContainer>
-        )}
-      />
-      <PlusButton />
-    </Container>
+            </CardContainer>
+          ))}
+        </>
+      </ParallaxScrollView>
   )
 }

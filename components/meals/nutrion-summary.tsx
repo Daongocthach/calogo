@@ -58,5 +58,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 10,
     alignItems: 'center',
+    maxWidth: 100,
   },
 })

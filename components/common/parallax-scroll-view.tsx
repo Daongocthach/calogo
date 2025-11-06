@@ -9,16 +9,18 @@ import Animated, {
 
 import { useTheme } from '@/hooks'
 
-const HEADER_HEIGHT = 250
+const HEADER_HEIGHT = 200
 
 type Props = PropsWithChildren<{
   children: ReactElement
   headerImage: ReactElement
+  headerHeight?: number
 }>
 
 export default function ParallaxScrollView({
   children,
   headerImage,
+  headerHeight = HEADER_HEIGHT
 }: Props) {
   const { colors } = useTheme()
   const scrollRef = useAnimatedRef<Animated.ScrollView>()
@@ -29,8 +31,8 @@ export default function ParallaxScrollView({
         {
           translateY: interpolate(
             scrollOffset.value,
-            [-HEADER_HEIGHT, 0, HEADER_HEIGHT],
-            [-HEADER_HEIGHT / 2, 0, HEADER_HEIGHT * 0.75]
+            [-headerHeight, 0, headerHeight],
+            [-headerHeight / 2, 0, headerHeight * 0.75]
           ),
         },
         {
@@ -65,10 +67,11 @@ const styles = StyleSheet.create({
   header: {
     height: HEADER_HEIGHT,
     overflow: 'hidden',
+    marginTop: 10,
   },
   content: {
     flex: 1,
-    padding: 32,
+    padding: 12,
     gap: 16,
     overflow: 'hidden',
   },
