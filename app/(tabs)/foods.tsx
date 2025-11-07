@@ -2,75 +2,112 @@ import { icons } from 'lucide-react-native'
 import React from 'react'
 import { View } from 'react-native'
 
-import { CardContainer, ColumnComponent, Container, FlatListComponent, IconComponent, RowComponent, TextComponent } from '@/components'
-import CircularProgressRing from '@/components/common/circle-progress'
+import {
+  CardContainer,
+  ColumnComponent,
+  Container,
+  FlatListComponent,
+  IconComponent,
+  RowComponent,
+  TextComponent,
+} from '@/components'
 import PlusButton from '@/components/common/plus-button'
-import NutritionSummary from '@/components/meals/nutrion-summary'
+import { Food, mockFoodCategories, mockFoods } from '@/lib'
 
-const FoodCard = ({
+const CategoryIcon = ({
   icon,
   iconColor,
-  backgroundColor
+  backgroundColor,
 }: {
-  icon: keyof typeof icons,
-  iconColor?: string,
+  icon: keyof typeof icons
+  iconColor?: string
   backgroundColor: string
 }) => (
   <View style={{ padding: 10, backgroundColor, borderRadius: 100 }}>
-    <IconComponent
-      name={icon}
-      size={15}
-      color={iconColor}
-    />
+    <IconComponent name={icon} size={16} color={iconColor} />
   </View>
 )
 
 export default function Foods() {
+  const foodsByCategory = mockFoodCategories.map((cat) => ({
+    ...cat,
+    items: mockFoods.filter((f) => f.category_id === cat.id),
+  }))
 
   return (
     <Container>
       <FlatListComponent
-        data={mockMeals}
-        keyExtractor={(item) => item.id.toString()}
-        ListHeaderComponent={
-          <ColumnComponent alignItems='center' gap={10} style={{ marginBottom: 10 }} >
-            <CircularProgressRing value={1540} goal={2000} size={120} strokeWidth={10} />
-            <NutritionSummary remaining={460} protein={78} fat={52} />
-          </ColumnComponent>
-        }
-        renderItem={({ item }: { item: meal }) => (
+        data={foodsByCategory}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
           <CardContainer>
             <ColumnComponent gap={15}>
-              <RowComponent justify='space-between'>
+              <RowComponent justify="space-between">
                 <RowComponent gap={10}>
-                  <MealIcon
-                    icon={item?.icon as keyof typeof icons}
-                    iconColor={item?.iconColor}
-                    backgroundColor={item?.backgroundColor}
+                  <CategoryIcon
+                    icon={item.icon as keyof typeof icons}
+                    iconColor={item.color ?? '#fff'}
+                    backgroundColor={`${item.color}30`}
                   />
-                  <TextComponent text={item?.type} type='title1' />
+                  <ColumnComponent>
+                    <TextComponent text={item.name} type="title1" />
+                    <TextComponent
+                      text={item.description ?? ''}
+                      type="caption"
+                      color="textSecondary"
+                    />
+                  </ColumnComponent>
                 </RowComponent>
-                <TextComponent text={`${item.totalCalories} kcal`} type='label' />
               </RowComponent>
-              <ColumnComponent gap={10}>
-                {item.food.length > 0 ? (
-                  item.food.map((foodItem, index) => (
-                    <RowComponent key={`${foodItem.name}-${index}`} justify='space-between'>
+
+              <ColumnComponent gap={8}>
+                {item.items.length > 0 ? (
+                  item.items.map((food: Food) => (
+                    <RowComponent
+                      key={food.id}
+                      justify="space-between"
+                      alignItems='center'
+                      style={{
+                        borderBottomWidth: 0.5,
+                        borderColor: '#E5E7EB',
+                        paddingVertical: 4,
+                      }}
+                    >
                       <ColumnComponent>
-                        <TextComponent text={foodItem?.name} type='title2' />
-                        <TextComponent text={foodItem?.quantity} type='caption' />
+                        <TextComponent text={food.name} type="title2" />
+                        <TextComponent
+                          text={`${food.calories} kcal / ${food.unit}`}
+                          type="caption"
+                          color="textSecondary"
+                        />
                       </ColumnComponent>
-                      <TextComponent text={`${foodItem?.calories} kcal`} type='label' />
+                      <ColumnComponent alignItems="flex-end">
+                        <TextComponent
+                          text={`${food.protein.toFixed(1)}g P`}
+                          type="label"
+                        />
+                        <TextComponent
+                          text={`${food.fat.toFixed(1)}g F | ${food.carbs.toFixed(1)}g C`}
+                          type="caption"
+                          color="textSecondary"
+                        />
+                      </ColumnComponent>
                     </RowComponent>
                   ))
                 ) : (
-                  <TextComponent text='No snacks added yet' type='label' textAlign='center' />
+                  <TextComponent
+                    text="No foods in this category"
+                    type="label"
+                    textAlign="center"
+                    color="textSecondary"
+                  />
                 )}
               </ColumnComponent>
             </ColumnComponent>
           </CardContainer>
         )}
       />
+
       <PlusButton />
     </Container>
   )

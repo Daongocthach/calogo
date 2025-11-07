@@ -1,10 +1,83 @@
-import { Food, MealType } from '@/lib'
+import { Food, FoodCategory, MealType } from '@/lib'
+
+export const mockFoodCategories: FoodCategory[] = [
+  {
+    id: 'cat-0001-fruits',
+    user_id: 'user-uuid-1',
+    name: 'Fruits',
+    icon: 'Apple',
+    color: '#FBBF24',
+    description: 'Edible sweet or sour products of plants, typically containing seeds.',
+    created_at: '2025-11-06T10:00:00Z',
+    updated_at: '2025-11-06T10:00:00Z',
+  },
+  {
+    id: 'cat-0002-vegetables',
+    user_id: 'user-uuid-1',
+    name: 'Vegetables',
+    icon: 'Leaf',
+    color: '#22C55E',
+    description: 'Edible parts of plants, including leaves, stems, roots, and flowers.',
+    created_at: '2025-11-06T10:00:00Z',
+    updated_at: '2025-11-06T10:00:00Z',
+  },
+  {
+    id: 'cat-0003-grains',
+    user_id: 'user-uuid-1',
+    name: 'Grains',
+    icon: 'Wheat',
+    color: '#FACC15',
+    description: 'Seeds of cereal plants, such as wheat, rice, and corn, which are staple foods.',
+    created_at: '2025-11-06T10:00:00Z',
+    updated_at: '2025-11-06T10:00:00Z',
+  },
+  {
+    id: 'cat-0004-proteins',
+    user_id: 'user-uuid-1',
+    name: 'Proteins',
+    icon: 'Drumstick',
+    color: '#EF4444',
+    description: 'Foods rich in protein, including meat, fish, eggs, beans, and nuts.',
+    created_at: '2025-11-06T10:00:00Z',
+    updated_at: '2025-11-06T10:00:00Z',
+  },
+  {
+    id: 'cat-0005-dairy',
+    user_id: 'user-uuid-1',
+    name: 'Dairy',
+    icon: 'Milk',
+    color: '#60A5FA',
+    description: 'Products made from milk, such as cheese, yogurt, and butter.',
+    created_at: '2025-11-06T10:00:00Z',
+    updated_at: '2025-11-06T10:00:00Z',
+  },
+  {
+    id: 'cat-0006-fats-oils',
+    user_id: 'user-uuid-1',
+    name: 'Fats and Oils',
+    icon: 'Droplet',
+    color: '#EAB308',
+    description: 'Sources of energy and essential fatty acids, including butter, olive oil, and avocados.',
+    created_at: '2025-11-06T10:00:00Z',
+    updated_at: '2025-11-06T10:00:00Z',
+  },
+  {
+    id: 'cat-0007-sweets-snacks',
+    user_id: 'user-uuid-1',
+    name: 'Sweets and Snacks',
+    icon: 'Cookie',
+    color: '#C084FC',
+    description: 'Foods that are high in sugar or fat, often consumed as treats.',
+    created_at: '2025-11-06T10:00:00Z',
+    updated_at: '2025-11-06T10:00:00Z',
+  },
+]
 
 export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0001-0000-0000-000000000001',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0003-grains', // Cơm trắng → Grains
     name: 'Cơm trắng',
     calories: 130,
     protein: 2.7,
@@ -18,7 +91,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0002-0000-0000-000000000002',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0004-proteins', // Ức gà → Protein
     name: 'Ức gà luộc',
     calories: 165,
     protein: 31,
@@ -32,7 +105,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0003-0000-0000-000000000003',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0004-proteins', // Trứng gà → Protein
     name: 'Trứng gà luộc',
     calories: 155,
     protein: 13,
@@ -46,7 +119,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0004-0000-0000-000000000004',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0004-proteins', // Cá hồi → Protein
     name: 'Cá hồi nướng',
     calories: 208,
     protein: 20,
@@ -60,7 +133,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0005-0000-0000-000000000005',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0002-vegetables', // Bông cải xanh → Vegetables
     name: 'Bông cải xanh luộc',
     calories: 35,
     protein: 2.4,
@@ -74,7 +147,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0006-0000-0000-000000000006',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0003-grains', // Yến mạch → Grains
     name: 'Yến mạch',
     calories: 389,
     protein: 16.9,
@@ -88,7 +161,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0007-0000-0000-000000000007',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0003-grains', // Khoai lang → Grains
     name: 'Khoai lang luộc',
     calories: 86,
     protein: 1.6,
@@ -102,7 +175,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0008-0000-0000-000000000008',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0005-dairy', // Sữa chua → Dairy
     name: 'Sữa chua Hy Lạp',
     calories: 59,
     protein: 10,
@@ -116,7 +189,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0009-0000-0000-000000000009',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0001-fruits', // Chuối → Fruits
     name: 'Chuối',
     calories: 89,
     protein: 1.1,
@@ -130,7 +203,7 @@ export const mockFoods: Food[] = [
   {
     id: '1a2b3c4d-0010-0000-0000-000000000010',
     user_id: 'user-uuid-1',
-    category_id: null,
+    category_id: 'cat-0006-fats-oils', // Bơ → Fats & Oils
     name: 'Bơ (Avocado)',
     calories: 160,
     protein: 2,
@@ -142,6 +215,7 @@ export const mockFoods: Food[] = [
     updated_at: '2025-11-06T10:00:00Z',
   },
 ]
+
 
 export const mockMealTypes: MealType[] = [
   {
