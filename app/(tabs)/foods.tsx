@@ -1,45 +1,66 @@
-import { icons } from 'lucide-react-native'
 import React from 'react'
-import { View } from 'react-native'
 
 import {
   CardContainer,
+  CategoryIcon,
   ColumnComponent,
-  Container,
   FlatListComponent,
-  IconComponent,
   RowComponent,
   TextComponent,
+  TextInputComponent
 } from '@/components'
+import ButtonComponent from '@/components/common/button-component'
 import PlusButton from '@/components/common/plus-button'
-import { Food, mockFoodCategories, mockFoods } from '@/lib'
-
-const CategoryIcon = ({
-  icon,
-  iconColor,
-  backgroundColor,
-}: {
-  icon: keyof typeof icons
-  iconColor?: string
-  backgroundColor: string
-}) => (
-  <View style={{ padding: 10, backgroundColor, borderRadius: 100 }}>
-    <IconComponent name={icon} size={16} color={iconColor} />
-  </View>
-)
+import { Food, mockFoods } from '@/lib'
+import { View } from 'react-native'
 
 export default function Foods() {
-  const foodsByCategory = mockFoodCategories.map((cat) => ({
-    ...cat,
-    items: mockFoods.filter((f) => f.category_id === cat.id),
-  }))
 
   return (
-    <Container>
+    <View style={{ position: 'relative' }}>
+      <TextInputComponent isSearch placeholder='search' />
+
       <FlatListComponent
-        data={foodsByCategory}
+        data={mockFoods}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+        // ListHeaderComponent={
+        //   <View style={{ backgroundColor: 'white' }}>
+        //   <TextInputComponent isSearch placeholder='search'/>
+        //   </View>
+        // }
+        // stickyHeaderIndices={[0]}
+        renderItem={({ item }: { item: Food }) => (
+          <CardContainer>
+            <RowComponent justify="space-between">
+              <RowComponent gap={10}>
+                <CategoryIcon
+                  icon={"Leaf"}
+                  iconColor={"#22C55E"}
+                  backgroundColor={`#22C55E30`}
+                />
+                <ColumnComponent>
+                  <TextComponent text={item.name} type="title1" />
+                  <TextComponent
+                    text={"165 cal per 100g"}
+                    type="caption"
+                    color="textSecondary"
+                  />
+                </ColumnComponent>
+              </RowComponent>
+
+              <RowComponent gap={10}>
+                <ButtonComponent icon='Trash' />
+                <ButtonComponent icon='Pencil' />
+              </RowComponent>
+            </RowComponent>
+
+          </CardContainer>
+        )}
+      />
+      {/* <FlatListComponent
+        data={mockFoods}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }: { item: Food }) => (
           <CardContainer>
             <ColumnComponent gap={15}>
               <RowComponent justify="space-between">
@@ -59,7 +80,6 @@ export default function Foods() {
                   </ColumnComponent>
                 </RowComponent>
               </RowComponent>
-
               <ColumnComponent gap={8}>
                 {item.items.length > 0 ? (
                   item.items.map((food: Food) => (
@@ -106,9 +126,9 @@ export default function Foods() {
             </ColumnComponent>
           </CardContainer>
         )}
-      />
+      /> */}
 
       <PlusButton />
-    </Container>
+    </View>
   )
 }

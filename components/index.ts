@@ -26,3 +26,5 @@ export { default as TextComponent } from "@/components/common/text-component"
 export { default as TextInputComponent } from "@/components/common/text-input-component"
 export { default as UserAvatar } from "@/components/common/user-avatar"
 
+export { default as CategoryIcon } from "@/components/foods/category-icon"
+
