@@ -1,10 +1,20 @@
+import { useRouter } from 'expo-router'
 import { icons } from 'lucide-react-native'
 import React from 'react'
 import { View } from 'react-native'
 
-import { CardContainer, ColumnComponent, IconComponent, ParallaxScrollView, RowComponent, TextComponent } from '@/components'
-import CircularProgressRing from '@/components/common/circle-progress'
-import NutritionSummary from '@/components/meals/nutrion-summary'
+import {
+  CardContainer,
+  CircularProgress,
+  ColumnComponent,
+  IconComponent,
+  NutritionSummary,
+  ParallaxScrollView,
+  PlusButton,
+  RowComponent,
+  TextComponent
+} from '@/components'
+import ButtonComponent from '@/components/common/button-component'
 
 type meal = {
   id: number,
@@ -121,12 +131,14 @@ const MealIcon = ({
 )
 
 export default function HomeScreen() {
+  const router = useRouter()
 
   return (
-    <ParallaxScrollView
+    <View style={{ flex: 1, position: 'relative' }}>
+      <ParallaxScrollView
         headerImage={
           <ColumnComponent alignItems='center' gap={10}>
-            <CircularProgressRing value={1540} goal={2000} size={120} strokeWidth={10} />
+            <CircularProgress value={1540} goal={2000} size={120} strokeWidth={10} />
             <NutritionSummary remaining={460} protein={78} fat={52} />
           </ColumnComponent>
         }
@@ -171,5 +183,8 @@ export default function HomeScreen() {
           ))}
         </>
       </ParallaxScrollView>
+      <PlusButton />
+      <ButtonComponent onPress={() => router.push('/welcome')} />
+    </View>
   )
 }

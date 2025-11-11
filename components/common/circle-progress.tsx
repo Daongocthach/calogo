@@ -5,7 +5,7 @@ import { Circle, Defs, LinearGradient, Stop, Svg } from 'react-native-svg'
 import { useTheme } from '@/hooks'
 import TextComponent from './text-component'
 
-interface CircularProgressRingProps {
+interface CircularProgressProps {
   value: number
   goal: number
   size?: number
@@ -13,13 +13,13 @@ interface CircularProgressRingProps {
   unit?: string
 }
 
-const CircularProgressRing = ({
+const CircularProgress = ({
   value,
   goal,
   size = 140,
   strokeWidth = 10,
   unit = 'kcal',
-}: CircularProgressRingProps) => {
+}: CircularProgressProps) => {
   const { colors } = useTheme()
   const center = size / 2
   const radius = (size - strokeWidth) / 2
@@ -92,4 +92,4 @@ const CircularProgressRing = ({
   )
 }
 
-export default CircularProgressRing
+export default CircularProgress
