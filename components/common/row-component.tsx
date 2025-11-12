@@ -1,55 +1,75 @@
 import React, { ReactNode } from 'react'
-import { StyleProp, TouchableOpacity, View, ViewStyle } from 'react-native'
+import {
+  FlexAlignType,
+  StyleProp,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewProps,
+  ViewStyle,
+} from 'react-native'
 
-interface Props {
-    children: ReactNode
-    justify?:
+interface RowComponentBaseProps {
+  children: ReactNode
+  justify?:
     | 'center'
     | 'flex-start'
     | 'flex-end'
     | 'space-between'
     | 'space-around'
     | 'space-evenly'
-    | undefined
-    alignItems?:
-    | 'center'
-    | 'flex-start'
-    | 'flex-end'
-    | 'space-between'
-    | 'space-around'
-    | 'space-evenly'
-    | undefined
-    onPress?: () => void
-    wrap?: boolean
-    gap?: number
-    style?: StyleProp<ViewStyle>
-    ref?: React.RefObject<View>
+  alignItems?: FlexAlignType
+  onPress?: () => void
+  wrap?: boolean
+  gap?: number
+  style?: StyleProp<ViewStyle>
 }
 
-const RowComponent = (props: Props) => {
-    const { children, justify, alignItems, onPress, style, gap, wrap, ref } = props
-    const localStyle = [
-        {
-            flexDirection: 'row',
-            alignItems:  alignItems ?? 'center',
-            justifyContent: justify ?? 'flex-start',
-            gap: gap ?? 0,
-            flexWrap: wrap ? 'wrap' : 'nowrap',
-        },
-        style,
-    ] as ViewStyle[]
+type RowComponentProps = RowComponentBaseProps &
+  (ViewProps | TouchableOpacityProps)
 
-    return onPress ? (
+const RowComponent = React.forwardRef<View, RowComponentProps>(
+  (
+    {
+      children,
+      justify = 'flex-start',
+      alignItems = 'center',
+      onPress,
+      style,
+      gap = 0,
+      wrap = false,
+      ...rest
+    },
+    ref
+  ) => {
+    const baseStyle: ViewStyle = {
+      flexDirection: 'row',
+      alignItems,
+      justifyContent: justify,
+      gap,
+      flexWrap: wrap ? 'wrap' : 'nowrap',
+    }
+
+    if (onPress) {
+      return (
         <TouchableOpacity
-            ref={ref}
-            style={localStyle}
-            onPress={onPress ? () => onPress() : undefined}
+          ref={ref}
+          style={[baseStyle, style]}
+          onPress={onPress}
+          activeOpacity={0.7}
+          {...(rest as TouchableOpacityProps)}
         >
-            {children}
+          {children}
         </TouchableOpacity>
-    ) : (
-        <View style={localStyle}>{children}</View>
+      )
+    }
+
+    return (
+      <View ref={ref} style={[baseStyle, style]} {...(rest as ViewProps)}>
+        {children}
+      </View>
     )
-}
+  }
+)
 
 export default RowComponent

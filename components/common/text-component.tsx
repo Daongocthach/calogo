@@ -8,19 +8,20 @@ import { ThemeColorKeys } from '@/lib/types'
 
 type TextType =
   | 'display'
+  | 'title'
   | 'title1'
   | 'title2'
   | 'body'
   | 'caption'
   | 'label'
   | 'link'
+  | 'badge'
 
 interface TextComponentProps extends TextProps {
   children?: React.ReactNode
   style?: StyleProp<TextStyle>
   text?: string
   size?: number
-  lineHeight?: number
   color?: ThemeColorKeys
   fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold'
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify'
@@ -32,11 +33,10 @@ const TextComponent = ({
   style,
   text,
   size,
-  fontWeight = 'regular',
+  fontWeight,
   type = 'body',
   textAlign,
   color,
-  lineHeight,
   ...props
 }: TextComponentProps) => {
   const { colors } = useTheme()
@@ -67,14 +67,13 @@ const TextComponent = ({
     <Text
       {...props}
       style={[
+        styles[type],
         {
           color: resolvedColor,
           textAlign: textAlign ?? 'left',
-          fontFamily: getFontFamily(fontWeight),
-          fontSize: size,
-          lineHeight,
+          ...(fontWeight ? { fontFamily: getFontFamily(fontWeight) } : {}),
+          ...(size ? { fontSize: size } : {}),
         },
-        styles[type],
         style,
       ]}
     >
@@ -88,17 +87,22 @@ export default TextComponent
 const styles = StyleSheet.create({
   display: {
     fontSize: 20,
-    lineHeight: 25,
+    lineHeight: 26,
+    fontFamily: FONT_FAMILIES.SEMIBOLD,
+  },
+  title: {
+    fontSize: 18,
+    lineHeight: 24,
     fontFamily: FONT_FAMILIES.SEMIBOLD,
   },
   title1: {
     fontSize: 16,
-    lineHeight: 24,
+    lineHeight: 22,
     fontFamily: FONT_FAMILIES.SEMIBOLD,
   },
   title2: {
     fontSize: 14,
-    lineHeight: 22,
+    lineHeight: 20,
     fontFamily: FONT_FAMILIES.MEDIUM,
   },
   body: {
@@ -108,7 +112,7 @@ const styles = StyleSheet.create({
   },
   caption: {
     fontSize: 12,
-    lineHeight: 16,
+    lineHeight: 18,
     fontFamily: FONT_FAMILIES.REGULAR,
   },
   label: {
@@ -121,5 +125,10 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     fontFamily: FONT_FAMILIES.REGULAR,
     textDecorationLine: 'underline',
+  },
+  badge: {
+    fontSize: 7,
+    lineHeight: 10,
+    fontFamily: FONT_FAMILIES.MEDIUM,
   },
 })

@@ -16,7 +16,7 @@ import { FONT_FAMILIES } from '@/lib/constants'
 import Icon from './icon-component'
 import TextComponent from './text-component'
 
-interface TextInputComponentProps extends TextInputProps {
+interface CustomTextInputProps extends TextInputProps {
   style?: TextInputProps['style']
   viewStyle?: ViewStyle
   isSearch?: boolean
@@ -55,7 +55,7 @@ const TextInputComponent = ({
   labelColor,
   labelStyle,
   ...props
-}: TextInputComponentProps) => {
+}: CustomTextInputProps) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
   const [showPassword, setShowPassword] = useState(false)
@@ -105,7 +105,7 @@ const TextInputComponent = ({
   }
 
   return (
-    <View style={{ height: 48 }}>
+    <View style={{ flex: 1 }}>
       {label &&
         <TextComponent
           text={label}
@@ -219,7 +219,7 @@ const TextInputComponent = ({
 
 const styles = StyleSheet.create({
   container: {
-    height: 48,
+    height: 38,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
