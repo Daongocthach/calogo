@@ -24,7 +24,6 @@ interface Props extends SafeAreaViewProps {
   isBottomTab?: boolean
   noHeader?: boolean
   animation?: "fade" | "slide" | "none"
-
   safeTop?: boolean
   safeBottom?: boolean
 }

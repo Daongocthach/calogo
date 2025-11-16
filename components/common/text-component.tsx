@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 13,
     lineHeight: 18,
-    fontFamily: FONT_FAMILIES.REGULAR,
+    fontFamily: FONT_FAMILIES.MEDIUM,
   },
   link: {
     fontSize: 14,

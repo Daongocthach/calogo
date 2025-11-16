@@ -1,6 +1,6 @@
 import React, { useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View, ViewStyle } from 'react-native'
+import { TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
 import { RadioButton } from 'react-native-paper'
 
@@ -29,6 +29,7 @@ interface InlineDropdownProps {
   disabled?: boolean
   loading?: boolean
   labelColor?: string
+  labelStyle?: TextStyle
 }
 
 const InlineDropdown = ({
@@ -46,6 +47,7 @@ const InlineDropdown = ({
   disabled = false,
   loading = false,
   labelColor,
+  labelStyle
 }: InlineDropdownProps) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
@@ -62,16 +64,17 @@ const InlineDropdown = ({
 
   return (
     <View style={viewStyle}>
-      {!!label && (
+      {label &&
         <TextComponent
           text={label}
-          fontWeight='semibold'
+          type="label"
+          size={14}
+          style={[{ marginBottom: 8 }, labelStyle]}
           color={labelColor || "onSurface"}
-          style={{ marginBottom: 4 }}
         />
-      )}
+      }
 
-      <View style={{ position: 'relative', minHeight: 48 }}>
+      <View style={{ position: 'relative', height: 48 }}>
         <Dropdown
           disable={disabled}
           data={dataTranslated}
@@ -86,9 +89,10 @@ const InlineDropdown = ({
             {
               borderWidth: 1,
               borderColor: colors.outlineVariant,
-              borderRadius: 8,
+              borderRadius: 16,
               paddingHorizontal: 10,
               paddingVertical: 10,
+              height: 48,
               backgroundColor: colors.background,
               paddingRight: isClearable && safeValue ? 44 : 10,
             },
@@ -208,7 +212,6 @@ const InlineDropdown = ({
             <Icon name="X" size={14} color="onSurface" />
           </TouchableOpacity>
         )}
-
       </View>
     </View>
   )

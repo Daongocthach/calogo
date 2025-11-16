@@ -10,6 +10,7 @@ export { default as DateTimePicker } from "@/components/common/date-time-picker"
 export { default as FlatListComponent } from "@/components/common/flat-list-component"
 export { default as HapticTab, default as HapticTabComponent } from "@/components/common/haptic-tab"
 export { default as Header } from "@/components/common/header"
+export { default as HelloWave } from "@/components/common/hello-wave"
 export { default as IconComponent } from "@/components/common/icon-component"
 export { default as ImageComponent } from "@/components/common/image-component"
 export { default as InlineDropdown } from "@/components/common/inline-dropdown"
@@ -20,6 +21,7 @@ export { default as MultipleSelectDropdown } from "@/components/common/multiple-
 export { default as ParallaxScrollView } from "@/components/common/parallax-scroll-view"
 export { default as PlusButton } from "@/components/common/plus-button"
 export { default as PopupComponent } from "@/components/common/popup-component"
+export { default as Radio } from "@/components/common/radio"
 export { default as RefreshControlComponent } from "@/components/common/refresh-control-component"
 export { default as RowComponent } from "@/components/common/row-component"
 export { default as SectionListComponent } from "@/components/common/section-list-component"
@@ -31,4 +33,7 @@ export { default as UserAvatar } from "@/components/common/user-avatar"
 
 export { default as CategoryIcon } from "@/components/foods/category-icon"
 export { default as NutritionSummary } from "@/components/meals/nutrion-summary"
+
+export { default as GenderSelector } from "@/components/welcome/gender-selector"
+export { default as GoalSelector } from "@/components/welcome/goal-selector"
 
