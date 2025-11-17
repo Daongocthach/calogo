@@ -1,16 +1,13 @@
 import React, { useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown'
-import { RadioButton } from 'react-native-paper'
 
 import { useTheme } from "@/hooks"
-import { FONT_FAMILIES, windowWidth } from '@/lib/constants'
+import { FONT_FAMILIES } from '@/lib/constants'
 import { DropdownProps } from '@/lib/types'
 
-import ColumnComponent from './column-component'
 import Icon from './icon-component'
-import ImageComponent from './image-component'
 import RowComponent from './row-component'
 import TextComponent from './text-component'
 
@@ -25,11 +22,13 @@ interface InlineDropdownProps {
   isClearable?: boolean
   isSearch?: boolean
   searchPlaceholder?: string
-  isGaugeItem?: boolean
   disabled?: boolean
-  loading?: boolean
-  labelColor?: string
-  labelStyle?: TextStyle
+  isLoading?: boolean
+  onOpen?: () => void
+  isFetchingNextPage?: boolean
+  onEndReached?: () => void
+  onEndReachedThreshold?: number
+  hideFooter?: boolean
 }
 
 const InlineDropdown = ({
@@ -43,38 +42,38 @@ const InlineDropdown = ({
   isClearable = false,
   isSearch = false,
   searchPlaceholder = 'search',
-  isGaugeItem = false,
   disabled = false,
-  loading = false,
-  labelColor,
-  labelStyle
+  isLoading = false,
+  onOpen,
+  isFetchingNextPage,
+  onEndReached,
+  onEndReachedThreshold,
+  hideFooter = false,
 }: InlineDropdownProps) => {
   const { t } = useTranslation()
   const { colors } = useTheme()
   const dropdownRef = useRef<any>(null)
 
   const dataTranslated = useMemo(
-    () => selects.map(d => ({ ...d, label: t(d.label) })),
+    () => selects.map(data => ({ ...data, label: t(data.label) })),
     [selects, t]
   )
 
   const safeValue = useMemo(() => {
-    return dataTranslated.some(d => d.value === select) ? select : ''
+    return dataTranslated.some(data => data.value === select) ? select : ''
   }, [dataTranslated, select])
 
   return (
     <View style={viewStyle}>
-      {label &&
+      {label && (
         <TextComponent
           text={label}
-          type="label"
-          size={14}
-          style={[{ marginBottom: 8 }, labelStyle]}
-          color={labelColor || "onSurface"}
+          type="caption"
+          style={[{ marginBottom: 4, textTransform: 'uppercase' }]}
         />
-      }
+      )}
 
-      <View style={{ position: 'relative', height: 48 }}>
+      <View style={{ position: 'relative', minHeight: 48 }}>
         <Dropdown
           disable={disabled}
           data={dataTranslated}
@@ -82,30 +81,29 @@ const InlineDropdown = ({
           labelField="label"
           valueField="value"
           value={safeValue}
-          placeholder={loading ? t('loading') + '...' : t(placeholder)}
+          placeholder={t(placeholder)}
           search={isSearch}
           onChange={(item: DropdownProps) => setSelect(item.value)}
           style={[
             {
               borderWidth: 1,
               borderColor: colors.outlineVariant,
-              borderRadius: 16,
+              borderRadius: 8,
               paddingHorizontal: 10,
               paddingVertical: 10,
-              height: 48,
               backgroundColor: colors.background,
               paddingRight: isClearable && safeValue ? 44 : 10,
             },
             style as any,
           ]}
           placeholderStyle={{
-            color: colors.onSurfaceVariant,
-            fontSize: 14,
+            color: colors.onSurfaceDisabled,
+            fontSize: 13,
             fontFamily: FONT_FAMILIES.REGULAR
           }}
           selectedTextStyle={{
             color: colors.onSurfaceVariant,
-            fontSize: 14,
+            fontSize: 13,
             fontFamily: FONT_FAMILIES.REGULAR
           }}
           searchPlaceholder={t(searchPlaceholder)}
@@ -123,52 +121,34 @@ const InlineDropdown = ({
           renderRightIcon={() => (
             <Icon name="ChevronDown" size={18} color="onSurface" />
           )}
+          onFocus={() => onOpen?.()}
+          flatListProps={{
+            onEndReached: () => onEndReached?.(),
+            onEndReachedThreshold: onEndReachedThreshold ?? 0.3,
+            ListFooterComponent: hideFooter
+              ? null
+              : (isLoading || isFetchingNextPage)
+                ? (
+                  <TextComponent
+                    textAlign='center'
+                    type='caption'
+                    text="loading"
+                    style={{ marginVertical: 16 }}
+                  />
+                )
+                : selects.length > 0
+                  ? (
+                    <TextComponent
+                      textAlign='center'
+                      type='caption'
+                      text="end of page"
+                      style={{ marginVertical: 16 }}
+                    />
+                  )
+                  : null
+          }}
           renderItem={(item) => {
             const isSelected = item.value === safeValue
-
-            if (isGaugeItem) {
-              return (
-                <RowComponent
-                  style={{
-                    backgroundColor: isSelected ? colors.surface : 'transparent',
-                    paddingRight: 8,
-                    paddingVertical: 16,
-                  }}
-                  gap={10}
-                  onPress={() => {
-                    setSelect(item.value)
-                    dropdownRef.current?.close()
-                  }}
-                >
-                  <RowComponent>
-                    <RadioButton.Android
-                      value={item?.value}
-                      status={isSelected ? 'checked' : 'unchecked'}
-                      color={colors.primary}
-                      uncheckedColor={colors.primary}
-                      onPress={() => setSelect(item.value)}
-                    />
-                    <ImageComponent
-                      source={undefined}
-                      style={{ width: 80, height: 80, borderRadius: 8 }}
-                      resizeMode="cover"
-                    />
-                  </RowComponent>
-                  <ColumnComponent>
-                    <TextComponent
-                      text={item.label}
-                      color={isSelected ? "primary" : "onBackground"}
-                    />
-                    <TextComponent
-                      size={12}
-                      color="onSurface"
-                      style={{ maxWidth: windowWidth * 0.5 }}
-                      text={item.detail}
-                    />
-                  </ColumnComponent>
-                </RowComponent>
-              )
-            }
 
             return (
               <RowComponent
@@ -192,7 +172,7 @@ const InlineDropdown = ({
           maxHeight={340}
         />
 
-        {!loading && isClearable && !!safeValue && (
+        {!isLoading && isClearable && !!safeValue && (
           <TouchableOpacity
             onPress={() => setSelect('')}
             style={{

@@ -1,3 +1,4 @@
+import { ThemeColorKeys } from '@/lib'
 import React, { ReactNode } from 'react'
 import {
   FlexAlignType,
@@ -9,8 +10,8 @@ import {
   ViewStyle,
 } from 'react-native'
 
-interface RowComponentBaseProps {
-  children: ReactNode
+export interface RowComponentBaseProps {
+  children?: ReactNode
   justify?:
     | 'center'
     | 'flex-start'
@@ -19,6 +20,7 @@ interface RowComponentBaseProps {
     | 'space-around'
     | 'space-evenly'
   alignItems?: FlexAlignType
+  backgroundColor?: ThemeColorKeys
   onPress?: () => void
   wrap?: boolean
   gap?: number
@@ -34,6 +36,7 @@ const RowComponent = React.forwardRef<View, RowComponentProps>(
       children,
       justify = 'flex-start',
       alignItems = 'center',
+      backgroundColor,
       onPress,
       style,
       gap = 0,
@@ -48,6 +51,7 @@ const RowComponent = React.forwardRef<View, RowComponentProps>(
       justifyContent: justify,
       gap,
       flexWrap: wrap ? 'wrap' : 'nowrap',
+      backgroundColor,
     }
 
     if (onPress) {

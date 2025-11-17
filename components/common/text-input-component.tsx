@@ -105,16 +105,14 @@ const TextInputComponent = ({
   }
 
   return (
-    <View style={{ flexGrow: 1 }}>
-      {label &&
+    <View style={{ flex: 1 }}>
+      {label && (
         <TextComponent
           text={label}
-          type="label"
-          size={14}
-          style={[{ marginBottom: 8 }, labelStyle]}
-          color={labelColor || "onSurface"}
+          type="caption"
+          style={[{ marginBottom: 4, textTransform: 'uppercase' }]}
         />
-      }
+      )}
       <View
         style={[
           styles.container,
@@ -145,6 +143,7 @@ const TextInputComponent = ({
             styles.input,
             {
               color: colors.onBackground,
+              fontSize: 13,
               fontFamily: FONT_FAMILIES.REGULAR,
               textAlignVertical: textAlignVertical,
               paddingRight: canShowClear || rightIcon ? 30 : 0
@@ -223,9 +222,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 16,
+    borderRadius: 8,
     paddingHorizontal: 10,
-    position: "relative",
   },
   leftIcon: {
     marginRight: 10,

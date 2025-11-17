@@ -83,7 +83,7 @@ function ButtonComponent({
       bgColor: bg,
       borderColor: border,
       contentColor: color,
-      padding: ghost ? 0 : isIconOnly ? 0 : 10,
+      padding: ghost ? 0 : isIconOnly ? 0 : 12,
       borderWidth: outline ? 1 : 0
     }
   }, [disabled, loading, ghost, isIconOnly, outline, clear, backgroundColor, iconColor, getColorByKey])
@@ -106,10 +106,9 @@ function ButtonComponent({
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: 16,
+            borderRadius: 8,
             borderColor: borderColor,
             borderWidth,
-            height: 48,
             opacity: disabled ? 0.6 : 1,
             padding,
           },
@@ -148,3 +147,4 @@ function ButtonComponent({
 }
 
 export default ButtonComponent
+  

@@ -17,7 +17,7 @@ type TextType =
   | 'link'
   | 'badge'
 
-interface TextComponentProps extends TextProps {
+export interface TextComponentProps extends TextProps {
   children?: React.ReactNode
   style?: StyleProp<TextStyle>
   text?: string
@@ -60,7 +60,7 @@ const TextComponent = ({
     color
       ? getColorByKey(color)
       : ['caption', 'label'].includes(type)
-        ? colors.icon
+        ? colors.onSurfaceDisabled
         : colors.text
 
   return (
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILIES.MEDIUM,
   },
   body: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 13,
+    lineHeight: 18,
     fontFamily: FONT_FAMILIES.REGULAR,
   },
   caption: {
