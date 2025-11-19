@@ -87,7 +87,7 @@ export default TextComponent
 const styles = StyleSheet.create({
   display: {
     fontSize: 20,
-    lineHeight: 26,
+    lineHeight: 30,
     fontFamily: FONT_FAMILIES.SEMIBOLD,
   },
   title: {

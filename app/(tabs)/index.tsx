@@ -184,7 +184,7 @@ export default function HomeScreen() {
         </>
       </ParallaxScrollView>
       <PlusButton />
-      <ButtonComponent onPress={() => router.push('/welcome')} />
+      <ButtonComponent onPress={() => router.push('/login')} />
     </View>
   )
 }

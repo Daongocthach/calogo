@@ -1,37 +1,116 @@
-import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, View } from "react-native";
+import { Controller, useForm } from 'react-hook-form'
 
-export default function Page() {
-  const { t } = useTranslation();
+import {
+  ButtonComponent,
+  CardContainer,
+  ChangeLanguageDropdown,
+  ColumnComponent,
+  Container,
+  FormWrapper,
+  Overview,
+  SpaceComponent,
+  TextComponent,
+  TextInputComponent
+} from '@/components'
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>{t('history')}</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
-  );
+import IMAGES from '@/assets/images'
+import useStore from '@/store'
+
+type LoginFormInputs = {
+  email: string
+  password: string
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-});
+const Login = () => {
+  const { setActionName } = useStore()
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
+
+  const onSubmit = (data: LoginFormInputs) => {
+    setActionName('isLoggedIn', true)
+  }
+
+  return (
+    <Container isScroll safeTop>
+      <ChangeLanguageDropdown
+        viewStyle={{ alignSelf: 'flex-end', marginTop: 10 }}
+      />
+      <Overview
+        imageSource={IMAGES.LOGIN_BANNER}
+        title="log in to level up your projects"
+        caption="unlock tools to manage, collaborate, and excel. Take your projects further — smarter and faster"
+      />
+      <FormWrapper>
+        <SpaceComponent height={20} />
+        <CardContainer>
+          <ColumnComponent gap={10}>
+            <TextComponent text="sign in" type="title1" />
+            <TextComponent
+              text="sign in with your credentials"
+              type="label"
+            />
+            <Controller
+              control={control}
+              name="email"
+              rules={{
+                required: 'email is required',
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: 'invalid email format',
+                },
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputComponent
+                  placeholder="enter your email"
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  errorMessage={errors.email?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="password"
+              rules={{
+                required: 'password is required',
+                minLength: {
+                  value: 3,
+                  message: 'password must be at least 3 characters',
+                },
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputComponent
+                  placeholder="enter your password"
+                  isPassword
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  errorMessage={errors.password?.message}
+                />
+              )}
+            />
+            <ButtonComponent
+              onPress={handleSubmit(onSubmit)}
+              text="sign in"
+            />
+          </ColumnComponent>
+
+        </CardContainer>
+      </FormWrapper>
+    </Container>
+  )
+}
+
+export default Login

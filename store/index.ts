@@ -12,6 +12,7 @@ type StoreState = {
   userData: User | null
   accessToken: string
   refreshToken: string
+  signIn: (userData: User) => void
   setActionName: <key extends keyof StoreState>(key: key, value: StoreState[key]) => void
   resetCache: () => void
 }
@@ -40,8 +41,13 @@ const useStore = create<StoreState>()(
             accessToken: "",
             refreshToken: "",
           })
-        }
-
+        },
+        signIn: (userData) => {
+          set({
+            userData,
+            isLoggedIn: true
+          })
+        },
       }),
       {
         name: STORE_NAME,

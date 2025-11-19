@@ -59,12 +59,12 @@ const MultiSelectDropdown = ({
       {label && (!isNotShowInputSelect || items.length > 0) && (
         <TextComponent
           text={label}
-          style={{ marginBottom: 6 }}
-          color="onSurface"
-          fontWeight={'medium'}
+          type="label"
+          color={'onSurface'}
+          fontWeight='medium'
+          style={[{ marginBottom: 4 }]}
         />
       )}
-
       <MultiSelect
         data={dataTranslated}
         disable={disable}

@@ -22,3 +22,20 @@ export type Route = {
   title: string
   count?: string
 }
+
+
+export type FileProps = {
+  uri: string
+  name: string
+  type: string
+}
+
+export type LocalizedText = {
+  en: string
+  vi: string
+  'zh-CN': string
+  'zh-TW': string
+}
+
+
+export type LanguageProps = 'en' | 'vi' | 'zh-TW' | 'zh-CN'

@@ -1,34 +1,39 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from 'react'
 
-export default function Page() {
+import {
+  Container,
+  Settings,
+  TabViewComponent,
+  UserDetail,
+} from '@/components'
+
+const routes = [
+  { key: 'profile', title: 'profile' },
+  { key: 'settings', title: 'setttings' },
+]
+
+export default function ProfileScreen() {
+  const [index, setIndex] = useState(0)
+
+  const renderScene = ({ route }: any) => {
+    switch (route.key) {
+      case 'profile':
+        return <UserDetail />
+      case 'settings':
+        return <Settings />
+      default:
+        return null
+    }
+  }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
-  );
+    <Container>
+      <TabViewComponent
+        index={index}
+        setIndex={setIndex}
+        renderScene={renderScene}
+        routes={routes}
+      />
+    </Container>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-});

@@ -68,8 +68,10 @@ const InlineDropdown = ({
       {label && (
         <TextComponent
           text={label}
-          type="caption"
-          style={[{ marginBottom: 4, textTransform: 'uppercase' }]}
+          type="label"
+          color={'onSurface'}
+          fontWeight='medium'
+          style={[{ marginBottom: 4 }]}
         />
       )}
 
@@ -88,9 +90,9 @@ const InlineDropdown = ({
             {
               borderWidth: 1,
               borderColor: colors.outlineVariant,
-              borderRadius: 8,
+              borderRadius: 16,
               paddingHorizontal: 10,
-              paddingVertical: 10,
+              paddingVertical: 14,
               backgroundColor: colors.background,
               paddingRight: isClearable && safeValue ? 44 : 10,
             },
@@ -104,7 +106,7 @@ const InlineDropdown = ({
           selectedTextStyle={{
             color: colors.onSurfaceVariant,
             fontSize: 13,
-            fontFamily: FONT_FAMILIES.REGULAR
+            fontFamily: FONT_FAMILIES.REGULAR,
           }}
           searchPlaceholder={t(searchPlaceholder)}
           inputSearchStyle={{

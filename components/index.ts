@@ -8,6 +8,7 @@ export { default as ColumnComponent } from "@/components/common/column-component
 export { default as Container } from "@/components/common/container"
 export { default as DateTimePicker } from "@/components/common/date-time-picker"
 export { default as FlatListComponent } from "@/components/common/flat-list-component"
+export { default as FormWrapper } from "@/components/common/form-wrapper"
 export { default as HapticTab, default as HapticTabComponent } from "@/components/common/haptic-tab"
 export { default as Header } from "@/components/common/header"
 export { default as HelloWave } from "@/components/common/hello-wave"
@@ -18,6 +19,7 @@ export { default as LoadingScreen } from "@/components/common/loading-screen"
 export { default as MenuComponent } from "@/components/common/menu-component"
 export { default as ModalComponent } from "@/components/common/modal-component"
 export { default as MultipleSelectDropdown } from "@/components/common/multiple-select-dropdown"
+export { default as Overview } from "@/components/common/over-view"
 export { default as ParallaxScrollView } from "@/components/common/parallax-scroll-view"
 export { default as PlusButton } from "@/components/common/plus-button"
 export { default as PopupComponent } from "@/components/common/popup-component"
@@ -30,10 +32,19 @@ export { default as TabViewComponent } from "@/components/common/tab-view-compon
 export { default as TextComponent } from "@/components/common/text-component"
 export { default as TextInputComponent } from "@/components/common/text-input-component"
 export { default as UserAvatar } from "@/components/common/user-avatar"
+export { default as WaveBackground } from "@/components/common/wave-background"
 
 export { default as CategoryIcon } from "@/components/foods/category-icon"
 export { default as NutritionSummary } from "@/components/meals/nutrion-summary"
 
 export { default as GenderSelector } from "@/components/welcome/gender-selector"
 export { default as GoalSelector } from "@/components/welcome/goal-selector"
+
+export { default as Month } from "@/components/statistics/month"
+export { default as Week } from "@/components/statistics/week"
+export { default as Year } from "@/components/statistics/year"
+
+export { default as Settings } from "@/components/profile/settings"
+export { default as UserDetail } from "@/components/profile/user-detail"
+
 

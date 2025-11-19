@@ -38,7 +38,7 @@ const PlusButton = ({
             <IconComponent
                 name='Plus'
                 size={iconSize}
-                gradientColors={["#818cf8", "#ff6b81"]}
+                gradientColors={["#CCFBF1", "#38BDF8"]}
             />
         </TouchableOpacity>
     )

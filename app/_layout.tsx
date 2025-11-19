@@ -14,6 +14,7 @@ import { GlobalAlertProvider } from '@/contexts/global-alert-provider'
 import { ThemeProvider } from '@/contexts/theme-provider'
 import { FONT_FAMILIES } from '@/lib/constants'
 import i18next from '@/locales'
+import useStore from '@/store'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +34,8 @@ const queryClient = new QueryClient({
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
+  const { isLoggedIn } = useStore()
+
   const [loaded] = useFonts({
     [FONT_FAMILIES.REGULAR]: require('../assets/fonts/Inter-Regular.ttf'),
     [FONT_FAMILIES.MEDIUM]: require('../assets/fonts/Inter-Medium.ttf'),
@@ -64,7 +67,6 @@ export default function RootLayout() {
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen name="login" options={{ headerShown: false }} />
                 <Stack.Screen name="sign-up" options={{ headerShown: false }} />
-                <Stack.Screen name="welcome" options={{ headerShown: false }} />
                 <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal', animation: 'fade_from_bottom' }} />
               </Stack>
               <Toast />

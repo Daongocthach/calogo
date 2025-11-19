@@ -13,11 +13,11 @@ interface CardContainerProps extends TouchableOpacityProps {
 }
 
 const CardContainer = ({
-    children, 
+    children,
     style,
-    cardColor, 
-    isBlur, 
-    blurIntensity = 100, 
+    cardColor,
+    isBlur,
+    blurIntensity = 100,
     ...rest
 }: CardContainerProps) => {
     const { darkMode } = useStore()
@@ -64,14 +64,17 @@ const CardContainer = ({
             {...rest}
             activeOpacity={0.9}
             style={[{
-                backgroundColor: cardColor || colors.background,
-                borderRadius: 8,
+                flexDirection: 'column',
+                borderWidth: 1,
+                borderColor: colors.outlineVariant,
+                backgroundColor: colors.background,
                 padding: 20,
-                elevation: 1.5,
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 4,
+                borderRadius: 10,
+                shadowColor: colors.shadow,
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
             }, style]}
         >
             {children}

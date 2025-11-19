@@ -1,93 +1,70 @@
-import React, { ReactNode } from "react"
-import {
-  Platform,
-  ScrollView,
-  StatusBar,
-  View,
-  ViewStyle,
-} from "react-native"
-import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated"
-import {
-  SafeAreaViewProps,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context"
+import { ReactNode } from 'react'
+import { ScrollView, View, ViewStyle } from 'react-native'
+import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated'
+import { SafeAreaViewProps, useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { useTheme } from "@/hooks"
+import { useTheme } from '@/hooks'
+import WaveBackground from './wave-background'
 
 interface Props extends SafeAreaViewProps {
   children: ReactNode
   isScroll?: boolean
-  isImageBackground?: boolean
   style?: ViewStyle
   contentContainerStyle?: ViewStyle
-  blurRadius?: number
-  isBottomTab?: boolean
   noHeader?: boolean
-  animation?: "fade" | "slide" | "none"
   safeTop?: boolean
-  safeBottom?: boolean
+  animation?: 'fade' | 'slide' | 'none'
 }
 
 const Container = ({
   children,
-  isScroll = false,
+  isScroll,
   style,
   contentContainerStyle,
-  blurRadius = 0,
-  isBottomTab = false,
   noHeader = false,
-  animation = "slide",
-  safeTop = true,
-  safeBottom = true,
+  animation = 'slide',
+  safeTop,
   ...props
 }: Props) => {
-  const { colors } = useTheme()
   const insets = useSafeAreaInsets()
+  const { colors } = useTheme()
 
-  const ContentWrapper = isScroll ? ScrollView : View
-  const contentProps = {
-    contentContainerStyle: [
-      {
-        paddingHorizontal: 0,
-        flex: isScroll ? undefined : 1,
-      },
-      contentContainerStyle,
-    ],
-  }
+  const renderContent = () => (
+    isScroll ? (
+      <ScrollView
+        contentContainerStyle={[{
+          paddingHorizontal: 0,
+          flex: 1,
+        }, contentContainerStyle]}
+      >
+        {children}
+      </ScrollView>
+    ) : (
+      <View style={[{ flex: 1 }, style]}>
+        {children}
+      </View>
+    )
+  )
 
   const entering =
-    animation === "fade"
-      ? FadeInRight.duration(250)
-      : FadeInRight.duration(500)
+    animation === 'fade' ? FadeInRight.duration(250) : FadeInRight.duration(500)
   const exiting =
-    animation === "fade"
-      ? FadeOutLeft.duration(200)
-      : FadeOutLeft.duration(250)
+    animation === 'fade' ? FadeOutLeft.duration(200) : FadeOutLeft.duration(250)
 
   return (
     <Animated.View
       entering={entering}
       exiting={exiting}
-      style={[
-        {
-          flex: 1,
-          backgroundColor: colors.background,
-          paddingTop: safeTop ? insets.top : 0,
-          paddingBottom: safeBottom ? insets.bottom : 0,
-          paddingHorizontal: 12,
-        },
-        style,
-      ]}
+      style={{
+        flex: 1,
+        paddingHorizontal: 12,
+        backgroundColor: colors.background,
+        paddingTop: safeTop ? insets.top : 0,
+      }}
+      {...props}
     >
-      {Platform.OS === "android" && safeTop && (
-        <StatusBar
-          translucent
-          backgroundColor="transparent"
-          barStyle="dark-content"
-        />
-      )}
-
-      <ContentWrapper {...(contentProps as any)}>{children}</ContentWrapper>
+      <WaveBackground />
+      {renderContent()}
     </Animated.View>
   )
 }

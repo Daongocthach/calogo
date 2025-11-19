@@ -110,13 +110,14 @@ const DateTimePickerComponent = ({
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flexGrow: 1 }}>
       {label && (
         <TextComponent
-          style={styles.title}
           text={label}
-          fontWeight='semibold'
-          color="onSurface"
+          type="label"
+          color={'onSurface'}
+          fontWeight='medium'
+          style={[{ marginBottom: 4 }]}
         />
       )}
 
@@ -288,10 +289,10 @@ export default DateTimePickerComponent
 
 const styles = StyleSheet.create({
   input: {
-    height: 44,
+    height: 48,
     padding: 10,
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 16,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,

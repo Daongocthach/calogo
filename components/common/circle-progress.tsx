@@ -76,13 +76,11 @@ const CircularProgress = ({
 
       <View style={{ position: 'absolute', alignItems: 'center' }}>
         <TextComponent
-          type="title1"
-          size={size * 0.25}
+          type="display"
           text={formattedValue}
         />
         <TextComponent
-          type="caption"
-          size={size * 0.12}
+          type="label"
           color="icon"
         >
           / {formattedGoal} {unit}
