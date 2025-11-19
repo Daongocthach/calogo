@@ -63,34 +63,28 @@ export default function FlatListComponent({
             ListEmptyComponent={
                 (data.length < 1 && !isLoading) ? (
                     <TextComponent
-                        style={{
-                            textAlign: 'center',
-                            marginVertical: 16,
-                            color: colors.outlineVariant
-                        }}
+                        textAlign='center'
+                        type='caption'
                         text={isError ? 'error loading data' : 'no data found'}
+                        style={{ marginVertical: 16 }}
                     />
                 ) : null
             }
             ListFooterComponent={
                 (isLoading || isFetchingNextPage) ? (
                     <TextComponent
-                        style={{
-                            textAlign: 'center',
-                            marginVertical: 16,
-                            color: colors.outlineVariant
-                        }}
+                        textAlign='center'
+                        type='caption'
                         text="loading"
+                        style={{ marginVertical: 16 }}
                     />
                 ) : data.length > 0 ? (
                     (
                         <TextComponent
-                            style={{
-                                textAlign: 'center',
-                                marginVertical: 16,
-                                color: colors.outlineVariant
-                            }}
+                            textAlign='center'
+                            type='caption'
                             text="end of page"
+                            style={{ marginVertical: 16 }}
                         />
                     )
                 ) : null
